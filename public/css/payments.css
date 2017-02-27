@@ -1,0 +1,64 @@
+/* 支付结果 */
+.tip {
+  padding: 0.4em 20px;
+}
+
+.tip .tip-icon {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.tip .tip-icon img {
+  width: 90px
+}
+
+.tip h2 {
+  font-size: 20px;
+  text-align: center;
+  font-weight: normal;
+}
+
+.tip h2 strong {
+  color: #ca2e0a;
+}
+
+.tip .tip-btn {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.tip .ui-btn {
+  border-radius: 0;
+  font-size: 14px;
+  font-weight: normal;
+  border: 0;
+  box-shadow: 0 0 0;
+}
+
+.tip .ui-btn:last-child {
+  margin-right: 0
+}
+
+.tip-btn .btn + .btn {
+  margin-top: .8em
+}
+
+/* 支付方式列表 */
+.payment-title {
+  text-indent: .5em;
+  display: inline-block
+}
+
+.payment-checkbox {
+  width: 30px
+}
+
+.payment-checkbox .checkbox {
+  margin: 0;
+  height: 16px;
+}
+
+.payment-image {
+  width: 24px;
+  padding: 0 !important;
+}
