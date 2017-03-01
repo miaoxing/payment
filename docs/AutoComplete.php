@@ -3,7 +3,7 @@
 namespace plugins\payment\docs {
     /**
      * @property    \Miaoxing\Payment\Service\Payment $payment 支付方式
-     * @method      \services\Payments\Base|\Miaoxing\Payment\Service\Payment|\Miaoxing\Payment\Service\Payment[] payment($id = null)
+     * @method      \Miaoxing\Payment\Payment\Base|\Miaoxing\Payment\Service\Payment|\Miaoxing\Payment\Service\Payment[] payment($id = null)
      */
     class AutoComplete
     {

@@ -87,7 +87,7 @@ class Payment extends \miaoxing\plugin\BaseModel
      * 创建新的支付服务
      *
      * @param string $id
-     * @return \services\Payments\Base
+     * @return \Miaoxing\Payment\Payment\Base
      */
     public function createService($id)
     {
@@ -106,7 +106,7 @@ class Payment extends \miaoxing\plugin\BaseModel
     /**
      * 创建微信支付V2版服务
      *
-     * @return \services\payments\WeChatPay
+     * @return \Miaoxing\Payment\Payment\WeChatPay
      */
     public function createWeChatPayService()
     {
@@ -116,7 +116,7 @@ class Payment extends \miaoxing\plugin\BaseModel
     /**
      * 创建微信支付服务,自动识别V2,V3版
      *
-     * @return \services\payments\WeChatPay|\services\payments\WechatPayV3
+     * @return \Miaoxing\Payment\Payment\WeChatPay|\Miaoxing\Payment\Payment\WechatPayV3
      */
     public function createCurrentWechatPayService()
     {
@@ -126,7 +126,7 @@ class Payment extends \miaoxing\plugin\BaseModel
     /**
      * 创建支付宝支付服务
      *
-     * @return \services\payments\WeChatPay|\services\payments\WechatPayV3
+     * @return \Miaoxing\Payment\Payment\WeChatPay|\Miaoxing\Payment\Payment\WechatPayV3
      */
     public function createAlipayService()
     {
@@ -136,11 +136,11 @@ class Payment extends \miaoxing\plugin\BaseModel
     /**
      * 获取当前支付方式的支付服务对象
      *
-     * @return \services\payments\Base
+     * @return \Miaoxing\Payment\Payment\Base
      */
     public function getService()
     {
-        $class = 'services\\payments\\' . ucfirst($this['id']);
+        $class = 'Miaoxing\\Payment\\Payment\\' . ucfirst($this['id']);
 
         return new $class(['wei' => $this->wei] + $this['attrs']);
     }
