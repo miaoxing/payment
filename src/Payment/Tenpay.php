@@ -83,7 +83,7 @@ class Tenpay extends Base
             $reqUrl = "http://wap.tenpay.com/cgi-bin/wappayv2.0/wappay_gate.cgi?token_id=" . $token_id;
 
             // 渲染跳转页面的视图
-            return wei()->view->render('mall:mall/payment/tenpay.php', get_defined_vars());
+            return wei()->view->render('@order/mall/payment/tenpay.php', get_defined_vars());
         } else {
             // 后台调用通信失败,写日志，方便定位问题
             $this->logger->error("call err:" . $httpClient->getResponseCode() . "," . $httpClient->getErrInfo());
