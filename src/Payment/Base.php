@@ -2,7 +2,7 @@
 
 namespace Miaoxing\Payment\Payment;
 
-use plugins\mall\services\Order;
+use Miaoxing\Order\Service\Order;
 
 /**
  * TODO Payment服务和Order模型是否要关联起来?
