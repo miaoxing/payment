@@ -2,7 +2,7 @@
 
 namespace Miaoxing\Payment\Payment;
 
-use plugins\mall\services\Order;
+use Miaoxing\Order\Service\Order;
 use Miaoxing\Wechat\Service\WechatApi;
 use ReflectionClass;
 
@@ -274,7 +274,7 @@ class WechatPayV3 extends Base
         if ($data['product_id'][0] == '-') {
             // Step3.1 支付的是已有的订单
             $orderId = substr($data['product_id'], 1);
-            /** @var Order $order */
+            /** @var \Miaoxing\Order\Service\Order $order */
             $order = wei()->order()->findById($orderId);
             if (!$order) {
                 return $api->responseNativePay([
@@ -339,7 +339,7 @@ class WechatPayV3 extends Base
     /**
      * 通过订单生成prepayId
      *
-     * @param Order $order
+     * @param \Miaoxing\Order\Service\Order $order
      * @param array $data
      * @param array $testData
      * @return array
@@ -542,7 +542,7 @@ class WechatPayV3 extends Base
     /**
      * 附加更改时间,每次都是新的ID,解决微信支付不能改价的问题
      *
-     * @param Order $order
+     * @param \Miaoxing\Order\Service\Order $order
      * @return string
      */
     public function getOutTradeNo(Order $order)

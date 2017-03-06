@@ -2,7 +2,7 @@
 
 namespace Miaoxing\Payment\Service;
 
-use plugins\mall\services\Order;
+use Miaoxing\Order\Service\Order;
 
 class Payment extends \miaoxing\plugin\BaseModel
 {

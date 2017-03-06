@@ -2,7 +2,7 @@
 
 namespace Miaoxing\Payment\Payment;
 
-use plugins\mall\services\Order;
+use Miaoxing\Order\Service\Order;
 use Miaoxing\Wechat\Service\WechatApi;
 
 /**
@@ -221,7 +221,7 @@ class WeChatPay extends Base
     /**
      * 从订单创建JS支付的JSON数据
      *
-     * @param Order $order
+     * @param \Miaoxing\Order\Service\Order $order
      * @return array
      */
     public function createJsPayJsonFromOrder(Order $order)
