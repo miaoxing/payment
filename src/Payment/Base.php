@@ -155,7 +155,7 @@ abstract class Base extends \miaoxing\plugin\BaseService
      * @param array $signData
      * @return array
      */
-    public function refund($data =[], array $signData = [])
+    public function refund($data = [], array $signData = [])
     {
         return ['code' => 1, 'message' => '无退款逻辑,操作成功', 'refundOutId' => 0];
     }

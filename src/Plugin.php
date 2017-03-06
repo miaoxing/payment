@@ -20,7 +20,7 @@ class Plugin extends \miaoxing\plugin\BasePlugin
         $navs[] = [
             'parentId' => 'orders-service',
             'url' => 'admin/payments',
-            'name' => '支付接口管理'
+            'name' => '支付接口管理',
         ];
     }
 
@@ -45,7 +45,7 @@ class Plugin extends \miaoxing\plugin\BasePlugin
      */
     public function onPreOrderCreate(Order $order, Address $address = null, $data)
     {
-        $balanceAmount = (float)$data['balanceAmount'];
+        $balanceAmount = (float) $data['balanceAmount'];
         if (!$balanceAmount) {
             return;
         }
@@ -61,13 +61,13 @@ class Plugin extends \miaoxing\plugin\BasePlugin
         $order['balanceAmount'] = $balanceAmount;
         $order->setAmountRule('balance', [
             'name' => '余额支付',
-            'amountOff' => $balanceAmount
+            'amountOff' => $balanceAmount,
         ]);
     }
 
     public function onPostOrderCreate(Order $order)
     {
-        if (isset($order['balanceAmount']) && (float)$order['balanceAmount']) {
+        if (isset($order['balanceAmount']) && (float) $order['balanceAmount']) {
             wei()->transaction->pay(-$order['balanceAmount'], [
                 'recordId' => $order['id'],
             ], $order->getUser());
@@ -81,7 +81,7 @@ class Plugin extends \miaoxing\plugin\BasePlugin
      */
     public function onOrdersShowAmount(Order $order)
     {
-        if (isset($order['balanceAmount']) && (float)$order['balanceAmount']) {
+        if (isset($order['balanceAmount']) && (float) $order['balanceAmount']) {
             $this->view->display('payment:payments/ordersShowAmount.php', get_defined_vars());
         }
     }
@@ -96,7 +96,7 @@ class Plugin extends \miaoxing\plugin\BasePlugin
      */
     public function onPostOrderCancel(Order $order, $source)
     {
-        if ($source == 'timeout' && (float)$order['balanceAmount']) {
+        if ($source == 'timeout' && (float) $order['balanceAmount']) {
             wei()->transaction->refund($order['balanceAmount'], [
                 'recordId' => $order['id'],
                 'note' => '订单超时取消,返还支付余额',
