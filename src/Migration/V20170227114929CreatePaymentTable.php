@@ -22,9 +22,9 @@ class V20170227114929CreatePaymentTable extends BaseMigration
             ->string('image')
             ->decimal('baseMoney', 10)
             ->decimal('scoreRate', 8)->defaults('1.00')->comment('每消费一元获得多少积分')
-            ->timestamps()
-            ->userstamps()
-            ->softDeletable()
+            ->timestampsV1()
+            ->userstampsV1()
+            ->softDeletableV1()
             ->primary('id')
             ->exec();
 
