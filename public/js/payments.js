@@ -1,7 +1,12 @@
+/* global WeixinJSBridge */
 define(['jquery-form'], function () {
   var Payments = function () {
-
+    // do nothing.
   };
+
+  var CHECK_DELAY = 2000;
+  var MAX_CHECK_TIMES = 5;
+  var NATIVE_PAY_CHECK_TIMES = 1000;
 
   /**
    * 支付失败的跳转地址
@@ -17,10 +22,11 @@ define(['jquery-form'], function () {
    * 用于控制订单只提交一次
    */
   Payments.prototype.beforeSubmit = function () {
-    if (this.result != null) {
+    if (this.result !== null) {
       this.submit(this.result);
       return false;
     }
+    return true;
   };
 
   /**
@@ -39,17 +45,18 @@ define(['jquery-form'], function () {
    * 提交订单结果到支付平台
    */
   Payments.prototype.submit = function (ret) {
-    if (typeof ret.errorUrl != 'undefined') {
+    if (typeof ret.errorUrl !== 'undefined') {
       this.errorUrl = ret.errorUrl;
     }
 
     // 提交订单失败,提示错误信息
     if (ret.code < 1) {
-      return $.err(ret.message);
+      $.err(ret.message);
+      return;
     }
 
     var payType = ret.order.payType;
-    if (payType == 'wechatPayV3') {
+    if (payType === 'wechatPayV3') {
       // 微信支付,调用支付接口
       this.wechatPay(ret.payment, ret.id, payType);
     } else {
@@ -71,39 +78,39 @@ define(['jquery-form'], function () {
       dataType: 'json',
       global: false,
       url: $.url('orders/%s.json', id),
-      success: function (ret) {
-        paid = (ret.data.paid == '1');
+      success: function (result) {
+        paid = (result.data.paid === '1' || result.data.paid === true);
       }
     });
     return paid;
   };
 
   Payments.prototype.wechatPay = function (options, id, payType) {
-    var self = this;
+    var that = this;
 
     // 统一下单可能出错,因此增加提示,同时兼容旧版没有code字段
-    if (typeof options.code != 'undefined' && options.code < 1) {
-      alert(options.message);
+    if (typeof options.code !== 'undefined' && options.code < 1) {
+      $.alert(options.message);
       return;
     }
 
-    if (typeof WeixinJSBridge == 'undefined') {
-      alert('很抱歉,检测不到微信支付接口,请刷新页面,再试一次');
+    if (typeof WeixinJSBridge === 'undefined') {
+      $.alert('很抱歉,检测不到微信支付接口,请刷新页面,再试一次');
       return;
     }
 
-    if (options.type == 'js') {
+    if (options.type === 'js') {
       WeixinJSBridge.invoke('getBrandWCPayRequest', options.js, function (res) {
-        if (res.err_msg == 'get_brand_wcpay_request:ok') {
-          self.wechatPaySuc(id, 5, true, payType);
+        if (res.err_msg === 'get_brand_wcpay_request:ok') {
+          that.wechatPaySuc(id, MAX_CHECK_TIMES, true, payType);
         } else {
           $.log(res.err_msg);
-          self.wechatPayErr(id);
+          that.wechatPayErr(id);
         }
       });
     } else {
       window.location = options.native;
-      this.wechatPaySuc(id, 1000, false, payType);
+      this.wechatPaySuc(id, NATIVE_PAY_CHECK_TIMES, false, payType);
     }
   };
 
@@ -111,9 +118,9 @@ define(['jquery-form'], function () {
    * 循环向后台发送请求,检查是否支付成功
    */
   Payments.prototype.wechatPaySuc = function (id, maxTimes, showMessage, payType) {
-    var self = this;
+    var that = this;
     var time = 1;
-    maxTimes = maxTimes || 5;
+    maxTimes = maxTimes || MAX_CHECK_TIMES;
 
     var checkPay = function () {
       // Loading效果
@@ -122,7 +129,7 @@ define(['jquery-form'], function () {
       }
 
       // 支付成功
-      if (self.isPaid(id) == true) {
+      if (that.isPaid(id) === true) {
         $.loading('hide');
         window.location = $.url('mall/payment/result/' + payType, {orderNo: id});
         return;
@@ -130,7 +137,7 @@ define(['jquery-form'], function () {
 
       // 还未支付成功,继续检查
       if (time < maxTimes) {
-        setTimeout(checkPay, 2000);
+        setTimeout(checkPay, CHECK_DELAY);
         time++;
         return;
       }
