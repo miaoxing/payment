@@ -62,16 +62,16 @@
       <?php require $view->getFile('payment:admin/payments/types/' . $payment['type'] . '.php') ?>
 
       <div class="form-group">
-        <label class="col-lg-2 control-label" for="scoreRate">
+        <label class="col-lg-2 control-label" for="base-money">
           积分比率
         </label>
 
         <div class="col-lg-8">
           <p class="form-control-static pull-left">每购买&nbsp;</p>
-          <input type="text" class="form-control pull-left text-center input-mini" name="baseMoney" id="baseMoney">
+          <input type="text" class="form-control pull-left text-center input-mini" name="baseMoney" id="base-money">
 
           <p class="form-control-static pull-left">&nbsp;元商品,可得积分&nbsp;</p>
-          <input type="text" class="form-control pull-left text-center input-mini" name="scoreRate" id="scoreRate">
+          <input type="text" class="form-control pull-left text-center input-mini" name="scoreRate" id="score-rate">
 
           <p class="form-control-static pull-left">&nbsp;(不满部分则去除不计)</p>
         </div>

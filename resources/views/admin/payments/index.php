@@ -38,9 +38,9 @@
         <thead>
         <tr>
           <th>名称</th>
-          <th style="width: 120px">启用</th>
-          <th style="width: 120px">顺序</th>
-          <th style="width: 120px">操作</th>
+          <th class="t-6">启用</th>
+          <th class="t-6">顺序</th>
+          <th class="t-6">操作</th>
         </tr>
         </thead>
         <tbody>
