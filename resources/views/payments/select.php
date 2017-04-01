@@ -7,8 +7,8 @@
 <span class="payment-title">请选择支付方式</span>
 
 <ul class="list list-link list-indented payment-list">
-  <?php foreach ($payments as $i => $payment):
-  if (isset($isWechat) && !$isWechat && $payment['name'] == '微信支付'):
+  <?php foreach ($payments as $i => $payment) :
+  if (isset($isWechat) && !$isWechat && $payment['name'] == '微信支付') :
     continue;
   endif
   ?>

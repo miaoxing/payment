@@ -28,7 +28,8 @@ class TenpayPc extends Base
 
         require_once("vendor/tenpay_api_b2c/classes/RequestHandler.class.php");
 
-        /* 创建支付请求对象 */
+        // 创建支付请求对象
+
         $reqHandler = new \RequestHandler();
         $reqHandler->init();
         $reqHandler->setKey($this->key);
@@ -82,7 +83,8 @@ class TenpayPc extends Base
         require("vendor/tenpay_api_b2c/classes/client/ClientResponseHandler.class.php");
         require("vendor/tenpay_api_b2c/classes/client/TenpayHttpClient.class.php");
 
-        /* 创建支付应答对象 */
+        // 创建支付应答对象
+
         $resHandler = new \ResponseHandler();
         $resHandler->setKey($this->key);
 

@@ -90,12 +90,14 @@ class WeChatPay extends Base
         // 存储提交过来的签名
         $origSign = $queries['sign'];
 
-        // Step1 除sign字段外，所有参数按照字段名的ascii码从小到大排序后使用QueryString 的格式（即 key1=value1&key2=value2…）拼接而成字符串 string1，空值不传递，不参与签名组串
+        // Step1 除sign字段外，所有参数按照字段名的ascii码从小到大排序后使用QueryString 的格式
+        //（即 key1=value1&key2=value2…）拼接而成字符串 string1，空值不传递，不参与签名组串
         unset($queries['sign']);
         //array_filter($queries);
         $string1 = $this->wechatApi->generateSign($queries);
 
-        // Step2 在 string1 最后拼接上 key=paternerKey 得到 stringSignTemp 字符串，幵对stringSignTemp 进行 md5 运算，再将得到的字符串所有字符转换为大写，得到 sign 值signValue。
+        // Step2 在 string1 最后拼接上 key=paternerKey 得到 stringSignTemp 字符串，
+        // 幵对stringSignTemp 进行 md5 运算，再将得到的字符串所有字符转换为大写，得到 sign 值signValue。
         $sign = strtoupper(md5($string1 . '&key=' . $this->partnerKey));
 
         // 支付结果信息不为空时,表示支付失败
@@ -134,6 +136,7 @@ class WeChatPay extends Base
         $data = $this->postData = simplexml_load_string($data, 'SimpleXMLElement', LIBXML_NOCDATA);
 
         // 构造用于生成签名的数组,键名转小写
+        // @codingStandardsIgnoreStart
         $signData = [
             'appId' => (string)$data->AppId,
             'appKey' => $this->appKey,
@@ -142,10 +145,12 @@ class WeChatPay extends Base
             'openId' => (string)$data->OpenId,
             'isSubscribe' => (string)$data->IsSubscribe
         ];
+        // @codingStandardsIgnoreEnd
         $signData = array_change_key_case((array)$signData);
 
         // 按键名排序
         $sign = sha1($this->wechatApi->generateSign($signData));
+        // @codingStandardsIgnoreLine
         $result = $sign == (string)$data->AppSignature;
 
         $this->logger->info('verify post data ' . var_export($result, true));
@@ -186,13 +191,16 @@ class WeChatPay extends Base
 
         // Step2 生成订单详情（package）
 
-        // a.对所有传入参数按照字段名的 ASCII 码从小到大排序（字典序）后，使用 URL 键值对的格式（即key1=value1&key2=value2…）拼接成字符串 string1
+        // a.对所有传入参数按照字段名的 ASCII 码从小到大排序（字典序）后，
+        // 使用 URL 键值对的格式（即key1=value1&key2=value2…）拼接成字符串 string1
         $string1 = $this->wechatApi->generateSign($params);
 
-        // b.在 string1 最后拼接上 key=paternerKey 得到 stringSignTemp 字符串，并对signValue。stringSignTemp 进行 md5 运算，再将得到的字符串所有字符转换为大写，得到 sign 值
+        // b.在 string1 最后拼接上 key=paternerKey 得到 stringSignTemp 字符串，并对signValue。
+        // stringSignTemp 进行 md5 运算，再将得到的字符串所有字符转换为大写，得到 sign 值
         $sign = strtoupper(md5($string1 . '&key=' . $this->partnerKey));
 
-        // c.对 string1 中的所有键值对中的 value 进行 urlencode 转码，按照 a 步骤重新拼接成字符串，得到string2。对亍JS 前端程序，一定要使用函数encodeURIComponent进行 urlencode编码（注意！进行urlencode 时要将空格转化为%20而不是+）
+        // c.对 string1 中的所有键值对中的 value 进行 urlencode 转码，按照 a 步骤重新拼接成字符串，得到string2。
+        // 对亍JS 前端程序，一定要使用函数encodeURIComponent进行 urlencode编码（注意！进行urlencode 时要将空格转化为%20而不是+）
         $string2 = $this->wechatApi->generateSign($params, true);
 
         // d.将sign=signValue 拼接到string2后面得到最终的 package字符串

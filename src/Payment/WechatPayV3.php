@@ -265,10 +265,8 @@ class WechatPayV3 extends Base
         }
 
         // Step2 如果是新用户,记录到用户表,并设置用户登录态
-        $wei->curUser->loginBy(
-            ['wechatOpenId' => $data->OpenId],
-            ['isValid' => $data->IsSubscribe]
-        );
+        // @codingStandardsIgnoreLine
+        $wei->curUser->loginBy(['wechatOpenId' => $data->OpenId], ['isValid' => $data->IsSubscribe]);
 
         // Step3 根据数据生成订单
         if ($data['product_id'][0] == '-') {

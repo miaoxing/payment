@@ -27,7 +27,6 @@ class V20170227114929CreatePaymentTable extends BaseMigration
             ->softDeletableV1()
             ->primary('id')
             ->exec();
-
     }
 
     /**

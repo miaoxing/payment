@@ -22,7 +22,8 @@ class Tenpay extends Base
     {
         $this->setOption($options);
 
-        /* 创建支付请求对象 */
+        // 创建支付请求对象
+
         $reqHandler = new \RequestHandler();
         $reqHandler->init();
         $reqHandler->setKey($this->key);
@@ -91,7 +92,8 @@ class Tenpay extends Base
 
     public function verifyNotify()
     {
-        /* 创建支付应答对象 */
+        // 创建支付应答对象
+
         $resHandler = new \WapNotifyResponseHandler();
         $resHandler->setKey($this->key);
 
@@ -103,7 +105,6 @@ class Tenpay extends Base
 
         //判断签名
         if ($isTenpaySign) {
-
             //商户订单号
             $this->orderNo = $resHandler->getParameter('sp_billno');
 
