@@ -426,7 +426,6 @@ class WechatPayV3 extends Base
      *
      * @param int $length
      * @return string
-     * @see \Miaoxing\Payment\Payment\WeChatPay::generateNonceStr
      */
     protected function generateNonceStr($length = 32)
     {

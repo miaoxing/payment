@@ -17,14 +17,7 @@ class Payment extends \miaoxing\plugin\BaseModel
             'id' => 'wechatPayV3',
             'type' => 'wechatPayV3',
             'name' => '微信支付',
-            'displayName' => '微信支付V3版(最新)',
-            'image' => '/assets/images/payments/v2/wechat.png',
-        ],
-        'weChatPay' => [
-            'id' => 'weChatPay',
-            'type' => 'weChatPay',
-            'name' => '微信支付',
-            'displayName' => '微信支付V2版',
+            'displayName' => '微信支付',
             'image' => '/assets/images/payments/v2/wechat.png',
         ],
         // wechat pay cross country
@@ -104,29 +97,19 @@ class Payment extends \miaoxing\plugin\BaseModel
     }
 
     /**
-     * 创建微信支付V2版服务
-     *
-     * @return \Miaoxing\Payment\Payment\WeChatPay
-     */
-    public function createWeChatPayService()
-    {
-        return $this->createService('weChatPay');
-    }
-
-    /**
      * 创建微信支付服务,自动识别V2,V3版
      *
-     * @return \Miaoxing\Payment\Payment\WeChatPay|\Miaoxing\Payment\Payment\WechatPayV3
+     * @return \Miaoxing\Payment\Payment\WechatPayV3
      */
     public function createCurrentWechatPayService()
     {
-        return $this()->where("id IN ('wechatPayV3', 'weChatPay')")->findOne()->getService();
+        return $this()->where("id = 'wechatPayV3'")->findOne()->getService();
     }
 
     /**
      * 创建支付宝支付服务
      *
-     * @return \Miaoxing\Payment\Payment\WeChatPay|\Miaoxing\Payment\Payment\WechatPayV3
+     * @return \Miaoxing\Payment\Payment\Alipay
      */
     public function createAlipayService()
     {
