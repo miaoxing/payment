@@ -42,6 +42,5 @@ class Test extends Base
      */
     public function response($result)
     {
-        return;
     }
 }

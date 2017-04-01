@@ -96,7 +96,7 @@ class TenpayPc extends Base
 
         if ($isTenpaySign) {
             // 通知id
-            $notify_id = $resHandler->getParameter('notify_id');
+            $notifyId = $resHandler->getParameter('notify_id');
 
             // 通过通知ID查询，确保通知来至财付通
             // 创建查询请求
@@ -105,7 +105,7 @@ class TenpayPc extends Base
             $queryReq->setKey($this->key);
             $queryReq->setGateUrl('https://gw.tenpay.com/gateway/verifynotifyid.xml');
             $queryReq->setParameter('partner', $this->partner);
-            $queryReq->setParameter('notify_id', $notify_id);
+            $queryReq->setParameter('notify_id', $notifyId);
 
             // 通信对象
             $httpClient = new \TenpayHttpClient();
@@ -131,19 +131,23 @@ class TenpayPc extends Base
 
                 // 判断签名及结果
                 // 只有签名正确,retcode为0，trade_state为0才是支付成功
-                if ($queryRes->isTenpaySign() && $queryRes->getParameter('retcode') == '0' && $queryRes->getParameter('trade_state') == '0' && $queryRes->getParameter('trade_mode') == '1') {
+                if ($queryRes->isTenpaySign()
+                    && $queryRes->getParameter('retcode') == '0'
+                    && $queryRes->getParameter('trade_state') == '0'
+                    && $queryRes->getParameter('trade_mode') == '1'
+                ) {
                     // 取结果参数做业务处理
                     $this->orderNo = $queryRes->getParameter('out_trade_no');
                     // 财付通订单号
                     $this->outOrderNo = $queryRes->getParameter('transaction_id');
 
                     // 金额,以分为单位
-                    $total_fee = $queryRes->getParameter('total_fee');
+                    $totalFee = $queryRes->getParameter('total_fee');
                     // 如果有使用折扣券，discount有值，total_fee+discount=原请求的total_fee
                     $discount = $queryRes->getParameter('discount');
 
                     // 计算总的金额
-                    $this->orderAmount = ($total_fee + $discount) / 100;
+                    $this->orderAmount = ($totalFee + $discount) / 100;
 
                     //处理数据库逻辑
                     //注意交易单不要重复处理
@@ -151,7 +155,12 @@ class TenpayPc extends Base
                     return true;
                 } else {
                     // 错误时，返回结果可能没有签名，写日志trade_state、retcode、retmsg看失败详情。
-                    $this->logger->error('验证签名失败 或 业务错误信息:trade_state=' . $queryRes->getParameter('trade_state') . ',retcode=' . $queryRes->getParameter('retcode'). ',retmsg=' . $queryRes->getParameter('retmsg'));
+                    $this->logger->error(
+                        '验证签名失败 或 业务错误信息:trade_state=' .
+                        $queryRes->getParameter('trade_state') .
+                        ',retcode=' . $queryRes->getParameter('retcode').
+                        ',retmsg=' . $queryRes->getParameter('retmsg')
+                    );
 
                     return false;
                 }

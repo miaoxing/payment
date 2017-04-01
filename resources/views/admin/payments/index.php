@@ -55,7 +55,10 @@
 <!-- /row -->
 
 <script id="enable-row-tpl" type="text/html">
-  <label><input type="checkbox" class="ace table-input" name="enable" data-id="<%= id %>" value="<%= enable %>" <% if (enable == 1) { %>checked<% } %>><span class="lbl"></span></label>
+  <label><input type="checkbox" class="ace table-input" name="enable" data-id="<%= id %>"
+      value="<%= enable %>" <% if (enable == 1) { %>checked<% } %>>
+    <span class="lbl"></span>
+  </label>
 </script>
 
 <script id="table-actions" type="text/html">

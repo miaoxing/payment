@@ -16,7 +16,8 @@
 <div class="row">
   <div class="col-xs-12">
     <!-- PAGE CONTENT BEGINS -->
-    <form id="payment-form" class="form-horizontal" method="post" role="form" action="<?= $url('admin/payments/' . $payment->getFormAction()) ?>">
+    <form id="payment-form" class="form-horizontal" method="post" role="form"
+      action="<?= $url('admin/payments/' . $payment->getFormAction()) ?>">
       <div class="form-group hide">
         <label class="col-lg-2 control-label" for="id">
           <span class="text-warning">*</span>

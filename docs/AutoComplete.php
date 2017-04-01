@@ -2,9 +2,12 @@
 
 namespace plugins\payment\docs {
 
+    use Miaoxing\Payment\Payment\Base;
+    use Miaoxing\Payment\Service\Payment;
+
     /**
-     * @property    \Miaoxing\Payment\Service\Payment $payment 支付方式
-     * @method      \Miaoxing\Payment\Payment\Base|\Miaoxing\Payment\Service\Payment|\Miaoxing\Payment\Service\Payment[] payment($id = null)
+     * @property    Payment $payment 支付方式
+     * @method      Base|Payment|Payment[] payment($id = null)
      */
     class AutoComplete
     {
