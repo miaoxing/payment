@@ -2,6 +2,11 @@
 
 namespace Miaoxing\Payment\Payment;
 
+use Wei\Request;
+
+/**
+ * @property Request $request
+ */
 class Tenpay extends Base
 {
     /**
@@ -39,7 +44,7 @@ class Tenpay extends Base
         //----------------------------------------
         $reqHandler->setParameter('total_fee', $this->orderAmount * 100); //总金额
         //用户ip
-        $reqHandler->setParameter('spbill_create_ip', $_SERVER['REMOTE_ADDR']); //客户端IP
+        $reqHandler->setParameter('spbill_create_ip', $this->request->getServer('REMOTE_ADDR')); //客户端IP
         $reqHandler->setParameter('ver', '2.0'); //版本类型
         $reqHandler->setParameter('bank_type', '0'); //银行类型，财付通填写0
         $reqHandler->setParameter('callback_url', $this->returnUrl); //交易完成后跳转的URL

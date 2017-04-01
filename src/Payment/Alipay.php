@@ -21,14 +21,14 @@ class Alipay extends Base
      *
      * @var string
      */
-    public $partner;
+    protected $partner;
 
     /**
      * 安全检验码
      *
      * @var string
      */
-    public $key;
+    protected $key;
 
     /**
      * 用户付款中途退出返回商户的地址。需http://格式的完整路径，不允许加?id=123这类自定义参数
@@ -67,7 +67,7 @@ class Alipay extends Base
         // 必填，不需要修改
 
         // 返回格式
-        $v = '2.0';
+        $version = '2.0';
         // 必填，不需要修改
 
         // 请求号
@@ -122,7 +122,7 @@ class Alipay extends Base
             'partner' => trim($alipayConfig['partner']),
             'sec_id' => trim($alipayConfig['sign_type']),
             'format' => $format,
-            'v' => $v,
+            'v' => $version,
             'req_id' => $reqId,
             'req_data' => $reqData,
             '_input_charset' => trim(strtolower($alipayConfig['input_charset'])),
@@ -153,7 +153,7 @@ class Alipay extends Base
             'partner' => trim($alipayConfig['partner']),
             'sec_id' => trim($alipayConfig['sign_type']),
             'format' => $format,
-            'v' => $v,
+            'v' => $version,
             'req_id' => $reqId,
             'req_data' => $reqData,
             '_input_charset' => trim(strtolower($alipayConfig['input_charset'])),
@@ -383,5 +383,15 @@ class Alipay extends Base
     public function isPending()
     {
         return $this->status == 'WAIT_BUYER_PAY';
+    }
+
+    public function getPartner()
+    {
+        return $this->partner;
+    }
+
+    public function getKey()
+    {
+        return $this->key;
     }
 }

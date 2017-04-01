@@ -2,9 +2,13 @@
 
 namespace Miaoxing\Payment\Payment;
 
+use Wei\Request;
+
 /**
  * 测试商户号: 1900000109
  * 密钥: 8934e7d15453e97507ef794cf7b0519d
+ *
+ * @property Request $request
  */
 class TenpayPc extends Base
 {
@@ -40,7 +44,7 @@ class TenpayPc extends Base
         //----------------------------------------
         $reqHandler->setParameter('total_fee', $this->orderAmount * 100); //总金额
         //用户ip
-        $reqHandler->setParameter('spbill_create_ip', $_SERVER['REMOTE_ADDR']); //客户端IP
+        $reqHandler->setParameter('spbill_create_ip', $this->request->getServer('REMOTE_ADDR')); //客户端IP
         $reqHandler->setParameter('return_url', $this->returnUrl); //支付成功后返回
         $reqHandler->setParameter('partner', $this->partner);
         $reqHandler->setParameter('out_trade_no', $this->orderNo);

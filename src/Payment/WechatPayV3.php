@@ -387,16 +387,16 @@ class WechatPayV3 extends Base
      *
      * @param string $productId 注意文档说长度32,实际测试到4097仍正常
      * @param bool $shortUrl 是否生成短链接
-     * @param array $_signData 用于单元测试签名数据
+     * @param array $testSignData 用于单元测试签名数据
      * @return string
      * @throws \Exception
      * @link http://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=6_4
      */
-    public function createNativePayUrl($productId, $shortUrl = true, $_signData = [])
+    public function createNativePayUrl($productId, $shortUrl = true, $testSignData = [])
     {
         $api = $this->getApi();
 
-        $signData = $_signData + [
+        $signData = $testSignData + [
                 'appid' => $this->appId,
                 'mch_id' => $this->mchId,
                 'time_stamp' => strval(time()),
