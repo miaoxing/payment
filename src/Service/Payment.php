@@ -28,11 +28,18 @@ class Payment extends \miaoxing\plugin\BaseModel
             'displayName' => '微信跨境支付',
             'image' => '/assets/images/payments/v2/wechat.png',
         ],
+        'alipayWap' => [
+            'id' => 'alipayWap',
+            'type' => 'alipayWap',
+            'name' => '支付宝',
+            'displayName' => '支付宝(新版)',
+            'image' => '/assets/images/payments/v2/alipay.png',
+        ],
         'alipay' => [
             'id' => 'alipay',
             'type' => 'alipay',
             'name' => '支付宝',
-            'displayName' => '支付宝',
+            'displayName' => '支付宝(旧版)',
             'image' => '/assets/images/payments/v2/alipay.png',
         ],
         'tenpay' => [
