@@ -42,6 +42,13 @@ class Payment extends \miaoxing\plugin\BaseModel
             'displayName' => '支付宝(旧版)',
             'image' => '/assets/images/payments/v2/alipay.png',
         ],
+        'unionPay' => [
+            'id' => 'unionPay',
+            'type' => 'unionPay',
+            'name' => '银联支付',
+            'displayName' => '银联支付',
+            'image' => 'https://image-10001577.image.myqcloud.com/upload/10/20171011/1507718737880973.png',
+        ],
         'tenpay' => [
             'id' => 'tenpay',
             'type' => 'tenpay',

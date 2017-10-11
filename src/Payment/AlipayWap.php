@@ -71,7 +71,7 @@ class AlipayWap extends Base
         $request->setBizContent([
             'out_trade_no' => $options['orderNo'],
             'total_amount' => $options['orderAmount'],
-            'subject'      => $options['orderName'],
+            'subject' => $options['orderName'],
             'product_code' => 'QUICK_WAP_PAY',
         ]);
 
@@ -147,19 +147,14 @@ class AlipayWap extends Base
 
         // NOTE: 返回值没有文档提到的sub_code,根据实际情况判断
         if (!$response->isSuccessful()) {
-            return $this->err($data + [
-                    'message' => '支付宝返回错误信息:' . $response->getMessage(),
-                ]);
+            return $this->err(['message' => '支付宝返回错误信息:' . $response->getMessage()] + $data);
         }
 
         if ($response->getAlipayResponse('fund_change') !== 'Y') {
-            return $this->err($data + [
-                    'message' => '支付宝返回资金未变化,请检查是否已经退过款',
-                ]);
+            return $this->err(['message' => '支付宝返回资金未变化,请检查是否已经退过款'] + $data);
         }
 
-        return $this->suc($data + [
-                'refundOutId' => 0, // 没有外部退款编号
-            ]);
+        // 没有外部退款编号
+        return $this->suc(['refundOutId' => 0] + $data);
     }
 }
