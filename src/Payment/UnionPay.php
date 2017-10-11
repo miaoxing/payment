@@ -154,7 +154,7 @@ class UnionPay extends Base
          *        2）退货金额不超过总金额，可以进行多次退货
          *        3）退货能对11个月内的消费做（包括当清算日），支持部分退货或全额退货，到账时间较长，一般1-10个清算日（多数发卡行5天内，但工行可能会10天），所有银行都支持
          */
-        $params = array(
+        $params = [
             //以下信息非特殊情况不需要改动
             'version' => SDKConfig::getSDKConfig()->version,              //版本号
             'encoding' => 'utf-8',              //编码方式
@@ -184,7 +184,7 @@ class UnionPay extends Base
             //    注意控制数据长度，实际传输的数据长度不能超过1024位。
             //    查询、通知等接口解析时使用base64_decode解base64后再对数据做后续解析。
             //    'reqReserved' => base64_encode('任意格式的信息都可以'),
-        );
+        ];
 
         AcpService::sign($params); // 签名
         $url = SDKConfig::getSDKConfig()->backTransUrl;
