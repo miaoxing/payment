@@ -238,10 +238,19 @@ class UnionPay extends Base
 
         // 公用配置
         $config->signCertPwd = $this->certPassword;
-        $config->encryptCertPath = $this->plugin->getById($this->app->getNamespace())->getBasePath()
+
+        // 公用证书，所有商户一样
+        $name = $this->testMode ? 'test' : 'prod';
+        $certDir = $this->plugin->getById('union-pay')->getBasePath() . '/resources/certs';
+        $config->encryptCertPath = $certDir . '/acp_' . $name . '_enc.cer';
+        $config->middleCertPath = $certDir . '/acp_' . $name . '_middle.cer';
+        $config->rootCertPath = $certDir . '/acp_' . $name . '_root.cer';
+
+        // 当前商户的证书
+        $config->signCertPath = $this->plugin->getById($this->app->getNamespace())->getBasePath()
             . '/configs/union-pay/acp_prod_enc.cer';
 
-        // 测试模式特有配置
+        // 以下是测试模式特有配置
         if (!$this->testMode) {
             return;
         }
@@ -252,15 +261,9 @@ class UnionPay extends Base
             }
         }
 
+        $config->signCertPath = $certDir. '/acp_test_sign.pfx';
         $config->ifValidateCNName = false;
         $config->ifValidateRemoteCert = false;
-
-        $certDir = $this->plugin->getById('union-pay')->getBasePath() . '/resources/certs';
-        $config->signCertPath = $certDir . '/acp_test_sign.pfx';
-        $config->encryptCertPath = $certDir . '/acp_test_enc.cer';
-        $config->middleCertPath = $certDir . '/acp_prod_middle.cer';
-        $config->rootCertPath = $certDir . '/acp_prod_root.cer';
-
         $config->logLevel = 'DEBUG';
     }
 }
