@@ -27,6 +27,26 @@
   </div>
 
   <div class="form-group">
+    <label class="col-lg-2 control-label" for="attrs-test-mode">
+      <span class="text-warning">*</span>
+      测试模式
+    </label>
+    <div class="col-lg-4">
+      <!-- htmllint id-class-style="false" -->
+      <label class="radio-inline">
+        <input type="radio" class="testMode" name="attrs[testMode]" id="attrs-test-mode" value="1"> 开启
+      </label>
+      <label class="radio-inline">
+        <input type="radio" class="testMode" name="attrs[testMode]" id="attrs-test-mode-2" value="0" checked> 关闭
+      </label>
+      <!-- htmllint id-class-style="$previous" -->
+    </div>
+    <label for="attrs-test-mode">
+      开启后，可以使用银联提供的<a href="https://open.unionpay.com/ajweb/account/testPara" target="_blank">测试参数</a>来体验支付流程
+    </label>
+  </div>
+
+  <div class="form-group">
     <label class="col-lg-2 control-label">
       <span class="text-warning">*</span>
       商户私钥证书

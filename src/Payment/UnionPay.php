@@ -17,16 +17,22 @@ class UnionPay extends Base
     use RetTrait;
 
     /**
+     * 商户号
+     *
      * @var string
      */
     protected $merId;
 
     /**
+     * 证书密码
+     *
      * @var string
      */
     protected $certPassword;
 
     /**
+     * 测试末班
+     *
      * @var bool
      */
     protected $testMode = false;
@@ -235,8 +241,8 @@ class UnionPay extends Base
         $config->encryptCertPath = $this->plugin->getById($this->app->getNamespace())->getBasePath()
             . '/configs/union-pay/acp_prod_enc.cer';
 
-        // 开发环境特有配置
-        if (!$this->env->isDev()) {
+        // 测试模式特有配置
+        if (!$this->testMode) {
             return;
         }
 
