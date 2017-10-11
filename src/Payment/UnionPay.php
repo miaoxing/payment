@@ -16,9 +16,20 @@ class UnionPay extends Base
 {
     use RetTrait;
 
+    /**
+     * @var string
+     */
     protected $merId;
 
+    /**
+     * @var string
+     */
     protected $certPassword;
+
+    /**
+     * @var bool
+     */
+    protected $testMode = false;
 
     /**
      * {@inheritdoc}
