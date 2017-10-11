@@ -80,7 +80,11 @@ class AlipayWap extends Base
 
         $url = $response->getRedirectUrl();
 
-        return $this->response->redirect($url);
+        return [
+            'html' => $this->view->render('@alipay/alipay/submit.php', [
+                'url' => $url,
+            ]),
+        ];
     }
 
     /**
