@@ -24,7 +24,7 @@
       var maxBalance = numeric.subFloat(amounts.amount, minAmount);
 
       if (balance > maxBalance) {
-        if (maxBalance < 0) {
+        if (maxBalance <= 0) {
           showErr && $.err('订单金额需超过' + minAmount + '元才可使用余额');
           balance = '0.00';
         } else {
