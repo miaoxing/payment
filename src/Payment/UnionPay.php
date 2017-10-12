@@ -40,10 +40,18 @@ class UnionPay extends Base
     /**
      * {@inheritdoc}
      */
+    public function __construct(array $options)
+    {
+        parent::__construct($options);
+
+        $this->initSdkConfig();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function submit(array $options)
     {
-        $this->initSDkConfig();
-
         /**
          * 重要：联调测试时请仔细阅读注释！
          *
@@ -152,8 +160,6 @@ class UnionPay extends Base
      */
     public function refund($data = [], array $signData = [])
     {
-        $this->initSDkConfig();
-
         /**
          * 重要：联调测试时请仔细阅读注释！
          *
@@ -234,7 +240,7 @@ class UnionPay extends Base
         return $this->suc(['refundOutId' => $this->request['queryId']] + $data);
     }
 
-    protected function initSDkConfig()
+    protected function initSdkConfig()
     {
         $config = SDKConfig::getSDKConfig();
 
