@@ -152,6 +152,8 @@ class UnionPay extends Base
      */
     public function refund($data = [], array $signData = [])
     {
+        $this->initSDkConfig();
+
         /**
          * 重要：联调测试时请仔细阅读注释！
          *
@@ -181,7 +183,7 @@ class UnionPay extends Base
             'bizType' => '000201',              //业务类型
             'accessType' => '0',              //接入类型
             'channelType' => '07',              //渠道类型
-            'backUrl' => SDKConfig::getSDKConfig()->backUrl, //后台通知地址
+            'backUrl' => wei()->url->full('mall/payment/notify/unionPay'), //后台通知地址
 
             // 以下信息需要填写
             'orderId' => $data['refundId'],        //商户订单号，8-32位数字字母，不能含“-”或“_”，可以自行定制规则，重新产生，不同于原消费，此处默认取demo演示页面传递的参数
