@@ -9,7 +9,7 @@
       <input type="text" class="form-control merId" name="attrs[merId]" id="attrs-mer-id">
       <!-- htmllint id-class-style="$previous" -->
     </div>
-    <label class="col-lg-6">
+    <label class="col-lg-6 help-text">
       通过<a href="https://open.unionpay.com/ajweb/product/detail?id=66" target="_blank">银联</a>申请
     </label>
   </div>
@@ -41,7 +41,7 @@
       </label>
       <!-- htmllint id-class-style="$previous" -->
     </div>
-    <label for="attrs-test-mode">
+    <label class="col-lg-6 help-text" for="attrs-test-mode">
       开启后，可以使用银联提供的<a href="https://open.unionpay.com/ajweb/account/testPara" target="_blank">测试参数</a>来体验支付流程
     </label>
   </div>

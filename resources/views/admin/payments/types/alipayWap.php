@@ -9,7 +9,7 @@
       <input type="text" class="form-control appId" name="attrs[appId]" id="attrs-app-id">
       <!-- htmllint id-class-style="$previous" -->
     </div>
-    <label class="col-lg-6">
+    <label class="col-lg-6 help-text">
       通过<a href="https://docs.open.alipay.com/200/105310" target="_blank">蚂蚁金服开放平台</a>申请
     </label>
   </div>
