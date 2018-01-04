@@ -2,7 +2,7 @@
 
 namespace Miaoxing\Payment\Controller\Admin;
 
-class Payments extends \miaoxing\plugin\BaseController
+class Payments extends \Miaoxing\Plugin\BaseController
 {
     protected $adminNavId = 'orders';
 
