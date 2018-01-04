@@ -9,7 +9,7 @@ use Miaoxing\Order\Service\Order;
  *
  * @property \Wei\Logger $logger
  */
-abstract class Base extends \miaoxing\plugin\BaseService
+abstract class Base extends \Miaoxing\Plugin\BaseService
 {
     /**
      * @var \Miaoxing\Payment\Service\Payment
