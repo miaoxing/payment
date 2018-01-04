@@ -5,7 +5,7 @@ namespace Miaoxing\Payment;
 use Miaoxing\Address\Service\Address;
 use Miaoxing\Order\Service\Order;
 
-class Plugin extends \miaoxing\plugin\BasePlugin
+class Plugin extends \Miaoxing\Plugin\BasePlugin
 {
     protected $name = '支付系统';
 
