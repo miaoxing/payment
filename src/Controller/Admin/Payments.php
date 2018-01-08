@@ -29,12 +29,12 @@ class Payments extends \Miaoxing\Plugin\BaseController
 
                 $data = $payments->findAll()->toArray();
 
-                return $this->json('读取列表成功', 1, array(
+                return $this->json('读取列表成功', 1, [
                     'data' => $data,
                     'page' => $req['page'],
                     'rows' => $req['rows'],
                     'records' => $payments->count(),
-                ));
+                ]);
 
             default:
                 return get_defined_vars();
