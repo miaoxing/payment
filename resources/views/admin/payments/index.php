@@ -70,7 +70,7 @@
 </script>
 <?php require $this->getFile('product:admin/products/richInfo.php') ?>
 
-<?= $block('js') ?>
+<?= $block->js() ?>
 <script>
   require(['dataTable', 'form', 'jquery-deparam'], function () {
     var recordTable = $('#record-table').dataTable({

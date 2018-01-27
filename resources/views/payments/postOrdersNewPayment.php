@@ -8,7 +8,7 @@
   </li>
 </ul>
 
-<?= $block('js') ?>
+<?= $block->js() ?>
 <script>
   require(['assets/numeric'], function (numeric) {
     // 订单要超过多少才能使用余额

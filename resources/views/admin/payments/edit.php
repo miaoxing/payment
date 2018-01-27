@@ -129,7 +129,7 @@
 </div><!-- /.col -->
 <!-- /.row -->
 
-<?= $block('js') ?>
+<?= $block->js() ?>
 <script>
   require(['plugins/payment/js/admin/payments', 'form', 'ueditor', 'jquery-deparam'], function (payment) {
     payment.edit({

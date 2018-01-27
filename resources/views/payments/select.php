@@ -1,6 +1,6 @@
 <?php $isWechat = wei()->ua->isWeChat() ?>
 
-<?= $block('css') ?>
+<?= $block->css() ?>
 <link rel="stylesheet" href="<?= $asset('plugins/payment/css/payments.css') ?>">
 <?= $block->end() ?>
 
@@ -37,7 +37,7 @@
   <?php endforeach ?>
 </ul>
 
-<?= $block('js') ?>
+<?= $block->js() ?>
 <script>
   $('.js-payment-item').click(function () {
     $('.js-payment-id').prop('checked', false);
