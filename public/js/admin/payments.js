@@ -1,4 +1,4 @@
-define(function () {
+define(['plugins/admin/js/image-upload'], function () {
   var Payment = function () {
     // do nothing.
   };
@@ -19,7 +19,7 @@ define(function () {
         });
 
       // 点击选择图片
-      $('#image').imageInput();
+      $('#image').imageUpload();
     }
   });
 

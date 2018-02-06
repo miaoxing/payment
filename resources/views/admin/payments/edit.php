@@ -47,15 +47,7 @@
         </label>
 
         <div class="col-lg-4">
-          <div class="input-group">
-            <input type="text" class="form-control" id="image" name="image">
-                        <span class="input-group-btn">
-                            <button class="btn btn-white" type="button">
-                              <i class="fa fa-picture-o"></i>
-                              选择图片
-                            </button>
-                        </span>
-          </div>
+          <input type="text" class="form-control" id="image" name="image">
         </div>
       </div>
 
