@@ -1,5 +1,3 @@
-<?php $isWechat = wei()->ua->isWeChat() ?>
-
 <?= $block->css() ?>
 <link rel="stylesheet" href="<?= $asset('plugins/payment/css/payments.css') ?>">
 <?= $block->end() ?>
@@ -7,19 +5,14 @@
 <span class="payment-title">请选择支付方式</span>
 
 <ul class="list list-link list-indented payment-list">
-  <?php foreach ($payments as $i => $payment) :
-  if (isset($isWechat) && !$isWechat && $payment['name'] == '微信支付') :
-    continue;
-  endif
-  ?>
+  <?php foreach ($payments as $i => $payment) : ?>
   <li>
     <a class="js-payment-item list-item" href="javascript:;">
       <div class="list-col list-middle payment-checkbox">
         <div class="checkbox checkbox-circle checkbox-success">
           <label>
-
             <input class="js-payment-id payType" type="checkbox" name="payType"
-                   value="<?= $payment['id'] ?>" <?= $i == 0 ? 'checked' : '' ?>>
+              value="<?= $payment['id'] ?>" <?= $i == 0 ? 'checked' : '' ?>>
             <span class="checkbox-label"></span>
           </label>
         </div>
