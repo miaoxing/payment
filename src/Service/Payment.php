@@ -81,6 +81,8 @@ class Payment extends \Miaoxing\Plugin\BaseModel
         ],
     ];
 
+    protected $processedTypes = [];
+
     public function __invoke($id = null)
     {
         if ($id) {
@@ -137,7 +139,12 @@ class Payment extends \Miaoxing\Plugin\BaseModel
      */
     public function getService()
     {
-        $class = 'Miaoxing\\Payment\\Payment\\' . ucfirst($this['id']);
+        $types = $this->getTypes();
+        if (isset($types[$this['id']]['class'])) {
+            $class = $types[$this['id']]['class'];
+        } else {
+            $class = 'Miaoxing\\Payment\\Payment\\' . ucfirst($this['id']);
+        }
 
         return new $class(['wei' => $this->wei] + $this['attrs']);
     }
@@ -156,17 +163,23 @@ class Payment extends \Miaoxing\Plugin\BaseModel
 
     public function isSupport($type)
     {
-        return isset($this->types[$type]);
+        return isset($this->getTypes()[$type]);
     }
 
     public function getTypes()
     {
-        return $this->types;
+        if (!$this->processedTypes) {
+            $types = $this->types;
+            wei()->event->trigger('paymentGetTypes', [&$types]);
+            $this->processedTypes = $types;
+        }
+
+        return $this->processedTypes;
     }
 
     public function loadDefaultDataByType()
     {
-        $this->fromArray($this->types[$this['type']]);
+        $this->fromArray($this->getTypes()[$this['type']]);
 
         return $this;
     }

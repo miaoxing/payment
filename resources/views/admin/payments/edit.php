@@ -51,7 +51,7 @@
         </div>
       </div>
 
-      <?php require $view->getFile('payment:admin/payments/types/' . $payment['type'] . '.php') ?>
+      <?php require $view->getFile($paymentService->getFormFile()) ?>
 
       <div class="form-group">
         <label class="col-lg-2 control-label" for="base-money">

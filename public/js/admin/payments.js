@@ -15,7 +15,12 @@ define(['plugins/admin/js/image-upload'], function () {
         .loadJSON(this.data)
         .loadParams()
         .ajaxForm({
-          dataType: 'json'
+          dataType: 'json',
+          success: function (ret) {
+            $.msg(ret, function () {
+              window.location = $.url('admin/payments');
+            })
+          }
         });
 
       // 点击选择图片

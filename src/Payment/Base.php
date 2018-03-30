@@ -186,4 +186,12 @@ abstract class Base extends \Miaoxing\Plugin\BaseService
     {
         return ['code' => 1, 'message' => '发货成功'];
     }
+
+    public function getFormFile()
+    {
+        $parts = explode('\\', get_class($this));
+        $name = lcfirst(end($parts));
+
+        return '@payment/admin/payments/types/' . $name . '.php';
+    }
 }

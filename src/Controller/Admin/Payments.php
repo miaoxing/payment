@@ -63,6 +63,8 @@ class Payments extends \Miaoxing\Plugin\BaseController
             $payment->loadDefaultDataByType();
         }
 
+        $paymentService = $payment->getService();
+
         return get_defined_vars();
     }
 
