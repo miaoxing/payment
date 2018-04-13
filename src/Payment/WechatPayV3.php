@@ -257,7 +257,6 @@ class WechatPayV3 extends Base
 
         // Step1 校验签名,获取解析后的数据
         $data = $api->verifyNativePay($content);
-        $this->logger->info($data);
         if (!$data) {
             return $api->responseNativePay([
                 'return_code' => 'FAIL',
@@ -266,8 +265,8 @@ class WechatPayV3 extends Base
         }
 
         // Step2 如果是新用户,记录到用户表,并设置用户登录态
-        // @codingStandardsIgnoreLine
-        $wei->curUser->loginBy(['wechatOpenId' => $data->OpenId], ['isValid' => $data->IsSubscribe]);
+        $isValid = $data['is_subscribe'] === 'Y';
+        $wei->curUser->loginBy(['wechatOpenId' => $data['openid']], ['isValid' => $isValid]);
 
         // Step3 根据数据生成订单
         if ($data['product_id'][0] == '-') {
