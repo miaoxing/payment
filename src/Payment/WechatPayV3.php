@@ -47,6 +47,13 @@ class WechatPayV3 extends Base
      */
     protected $notifyResult = [];
 
+    protected function getName()
+    {
+        $parts = explode('\\', get_class($this));
+
+        return lcfirst(end($parts));
+    }
+
     public function getMchId()
     {
         return $this->mchId;
@@ -303,10 +310,11 @@ class WechatPayV3 extends Base
             // 将多个商品SKU转换为订单
             $order = wei()->order();
             $result = $order->createFromSkus($skus, [
-                'payType' => 'wechatPayV3',
+                'payType' => $this->getName(),
             ], [
                 'source' => Order::SOURCE_OFFLINE, // 认为是线下的支付,免邮
                 'createPayData' => false, // 无需创建支付数据,避免重复创建,导致微信提示订单已使用
+                'requireAddress' => false,
             ]);
             if ($result['code'] < 1) {
                 return $api->responseNativePay([
