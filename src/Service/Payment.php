@@ -119,7 +119,7 @@ class Payment extends \Miaoxing\Plugin\BaseModel
      */
     public function createCurrentWechatPayService()
     {
-        return $this()->where("id = 'wechatPayV3'")->findOne()->getService();
+        return $this()->where(['id' => ['wechatPayV3', 'wxaPay']])->findOne()->getService();
     }
 
     /**
