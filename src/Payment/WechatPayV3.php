@@ -167,7 +167,7 @@ class WechatPayV3 extends Base
             'message' => $ret['message'],
             'js' => $payData,
             'type' => 'js',
-            'prepayId' => $ret['prepay_id']
+            'prepayId' => $ret['prepay_id'],
         ];
     }
 
