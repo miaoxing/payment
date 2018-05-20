@@ -12,6 +12,7 @@
 <script>
   require(['assets/numeric'], function (numeric) {
     // 订单要超过多少才能使用余额
+    var delaySlow = 5000;
     var minAmount = '1.00';
     var userMoney = <?= $curUser['money'] ?>;
     var $amount = $('.js-balance-amount');
@@ -29,7 +30,7 @@
           balance = '0.00';
         } else {
           balance = maxBalance.toFixed(2);
-          showErr && $.err('最多可使用' + balance + '元余额');
+          showErr && $.err('必需使用支付方式至少支付1元,所以余额至多只能使用' + balance + '元', delaySlow);
         }
         $amount.val(balance);
       }
