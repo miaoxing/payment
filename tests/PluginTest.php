@@ -146,7 +146,7 @@ class PluginTest extends \Miaoxing\Plugin\Test\BaseTestCase
                 'price' => '100',
                 'quantity' => 10,
                 'images' => [
-                    '/assets/images/car1.png',
+                    'test.jpg',
                 ],
             ]);
             $this->assertRetSuc($ret);
