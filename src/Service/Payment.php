@@ -61,7 +61,7 @@ class Payment extends \Miaoxing\Plugin\BaseModel
             'type' => 'cashOnDelivery',
             'name' => '货到付款',
             'displayName' => '货到付款',
-            'image' => '/assets/images/payments/cashOnDelivery.png',
+            'image' => '/assets/images/payments/v2/testpay.png',
         ],
         // 用于只在该平台预订,但是在线下或其他渠道交易的订单
         // TODO 正常使用后替代测试支付
