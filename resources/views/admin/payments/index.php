@@ -1,34 +1,24 @@
 <?php $view->layout() ?>
 
-<div class="page-header">
-  <div class="btn-group pull-right">
 
-    <button data-toggle="dropdown" class="btn btn-success dropdown-toggle">
-      添加支付接口
-      <span class="fa fa-caret-down icon-on-right"></span>
-    </button>
+<?= $block('header-actions') ?>
+<div class="btn-group">
 
-    <ul class="dropdown-menu">
-      <?php foreach (wei()->payment->getTypes() as $type => $data) : ?>
-        <li>
-          <a href="<?= $url('admin/payments/new', ['type' => $type]) ?>"><?= $data['displayName'] ?></a>
-        </li>
-      <?php endforeach ?>
-    </ul>
+  <button data-toggle="dropdown" class="btn btn-success dropdown-toggle">
+    添加支付接口
+    <span class="fa fa-caret-down icon-on-right"></span>
+  </button>
 
-  </div>
-  <!-- /btn-group -->
+  <ul class="dropdown-menu">
+    <?php foreach (wei()->payment->getTypes() as $type => $data) : ?>
+      <li>
+        <a href="<?= $url('admin/payments/new', ['type' => $type]) ?>"><?= $data['displayName'] ?></a>
+      </li>
+    <?php endforeach ?>
+  </ul>
 
-  <h1>
-    微商城
-    <small>
-      <i class="fa fa-angle-double-right"></i>
-      支付接口设置
-    </small>
-  </h1>
 </div>
-
-<!-- /.page-header -->
+<?= $block->end() ?>
 
 <div class="row">
   <div class="col-xs-12">

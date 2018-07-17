@@ -1,17 +1,8 @@
 <?php $view->layout() ?>
 
-<div class="page-header">
-  <a class="btn btn-default pull-right" href="<?= $url('admin/payments') ?>">返回列表</a>
-
-  <h1>
-    微商城
-    <small>
-      <i class="fa fa-angle-double-right"></i>
-      支付接口设置
-    </small>
-  </h1>
-</div>
-<!-- /.page-header -->
+<?= $block('header-actions') ?>
+<a class="btn btn-default" href="<?= $url('admin/payments') ?>">返回列表</a>
+<?= $block->end() ?>
 
 <div class="row">
   <div class="col-xs-12">
