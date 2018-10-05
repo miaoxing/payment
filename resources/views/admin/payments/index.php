@@ -58,7 +58,7 @@
     </a>
   </div>
 </script>
-<?php require $this->getFile('product:admin/products/richInfo.php') ?>
+<?php require $this->getFile('@product/admin/products/richInfo.php') ?>
 
 <?= $block->js() ?>
 <script>
