@@ -34,7 +34,7 @@ class Plugin extends \Miaoxing\Plugin\BasePlugin
             return;
         }
 
-        $this->view->display('payment:payments/postOrdersNewPayment.php', get_defined_vars());
+        $this->view->display('@payment/payments/postOrdersNewPayment.php', get_defined_vars());
     }
 
     /**
@@ -82,7 +82,7 @@ class Plugin extends \Miaoxing\Plugin\BasePlugin
     public function onOrdersShowAmount(Order $order)
     {
         if (isset($order['balanceAmount']) && (float) $order['balanceAmount']) {
-            $this->view->display('payment:payments/ordersShowAmount.php', get_defined_vars());
+            $this->view->display('@payment/payments/ordersShowAmount.php', get_defined_vars());
         }
     }
 
