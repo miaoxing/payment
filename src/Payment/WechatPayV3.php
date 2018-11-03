@@ -3,7 +3,6 @@
 namespace Miaoxing\Payment\Payment;
 
 use Miaoxing\Order\Service\Order;
-use Miaoxing\Wechat\Service\WechatApi;
 use ReflectionClass;
 
 /**
@@ -168,49 +167,6 @@ class WechatPayV3 extends Base
             'js' => $payData,
             'type' => 'js',
             'prepayId' => $ret['prepay_id'],
-        ];
-    }
-
-    /**
-     * 创建打开微信地址签名数据
-     *
-     * @param array $data
-     * @return array
-     */
-    public function createAddressData(array $data = [])
-    {
-        // Step1 初始化数据
-        $data += [
-            'url' => '', // 必填
-            'timestamp' => time(),
-            'nonceStr' => $this->generateNonceStr(),
-        ];
-        $data['timestamp'] = (string) $data['timestamp'];
-
-        // Step2 生成地址签名
-        $signData = [
-            'appId' => $this->appId,
-            'url' => $data['url'],
-            'timestamp' => $data['timestamp'],
-            'nonceStr' => $data['nonceStr'],
-            'accessToken' => wei()->session['accessToken'],
-        ];
-
-        $signData = array_change_key_case($signData);
-        $addrSign = wei()->wechatApi->generateSha1Sign($signData);
-
-        // Step3 返回H5打开地址数据
-        return [
-            'code' => 1,
-            'message' => '生成成功',
-            'data' => [
-                'appId' => $this->appId,
-                'scope' => 'jsapi_address',
-                'signType' => 'sha1',
-                'addrSign' => $addrSign,
-                'timeStamp' => $data['timestamp'],
-                'nonceStr' => $data['nonceStr'],
-            ],
         ];
     }
 
