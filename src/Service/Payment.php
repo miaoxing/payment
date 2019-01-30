@@ -81,6 +81,22 @@ class Payment extends \Miaoxing\Plugin\BaseModel
         ],
     ];
 
+    protected $allNames = [
+        'alipay' => '支付宝',
+        'alipayWap' => '支付宝',
+        'tenpay' => '财付通',
+        'cashOnDelivery' => '货到付款',
+        'test' => '测试支付',
+        'wechatPayV3' => '微信支付',
+        'wechatPayCc' => '微信跨境支付',
+        'unionPay' => '银联支付',
+        'external' => '外部支付',
+        // 以下无需配置
+        'wxaPay' => '微信支付',
+        'balance' => '零钱',
+        'none' => '无',
+    ];
+
     protected $processedTypes = [];
 
     public function __invoke($id = null)
@@ -236,5 +252,10 @@ class Payment extends \Miaoxing\Plugin\BaseModel
             ->fetchColumn();
 
         return sprintf('%.2f', $consumeMoney);
+    }
+
+    public function getName($type)
+    {
+        return $this->allNames[$type];
     }
 }
