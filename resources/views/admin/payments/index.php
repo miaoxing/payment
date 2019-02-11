@@ -2,7 +2,7 @@
 
 
 <?= $block('header-actions') ?>
-<div class="btn-group">
+<div class="dropdown">
 
   <button data-toggle="dropdown" class="btn btn-success dropdown-toggle">
     添加支付接口
