@@ -6,16 +6,13 @@
 
   <button data-toggle="dropdown" class="btn btn-success dropdown-toggle">
     添加支付接口
-    <span class="fa fa-caret-down icon-on-right"></span>
   </button>
 
-  <ul class="dropdown-menu">
+  <div class="dropdown-menu dropdown-menu-right">
     <?php foreach (wei()->payment->getTypes() as $type => $data) : ?>
-      <li>
-        <a href="<?= $url('admin/payments/new', ['type' => $type]) ?>"><?= $data['displayName'] ?></a>
-      </li>
+      <a class="dropdown-item" href="<?= $url('admin/payments/new', ['type' => $type]) ?>"><?= $data['displayName'] ?></a>
     <?php endforeach ?>
-  </ul>
+  </div>
 
 </div>
 <?= $block->end() ?>
