@@ -49,14 +49,22 @@
           积分比率
         </label>
 
-        <div class="col-lg-8">
-          <p class="form-control-static pull-left">每购买&nbsp;</p>
-          <input type="text" class="form-control pull-left text-center input-mini" name="baseMoney" id="base-money">
-
-          <p class="form-control-static pull-left">&nbsp;元商品,可得积分&nbsp;</p>
-          <input type="text" class="form-control pull-left text-center input-mini" name="scoreRate" id="score-rate">
-
-          <p class="form-control-static pull-left">&nbsp;(不满部分则去除不计)</p>
+        <div class="col-lg-8 form-row align-items-center">
+          <div class="col-auto">
+            每购买
+          </div>
+          <div class="col-auto">
+            <input type="text" class="form-control pull-left text-center t-3" name="baseMoney" id="base-money">
+          </div>
+          <div class="col-auto">
+            元商品,可得积分
+          </div>
+          <div class="col-auto">
+            <input type="text" class="form-control pull-left text-center t-3" name="scoreRate" id="score-rate">
+          </div>
+          <div class="col-auto">
+            (不满部分则去除不计)
+          </div>
         </div>
       </div>
 
