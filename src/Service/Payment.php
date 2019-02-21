@@ -18,7 +18,7 @@ class Payment extends \Miaoxing\Plugin\BaseModel
             'type' => 'wechatPayV3',
             'name' => '微信支付',
             'displayName' => '微信支付',
-            'image' => '/assets/images/payments/v2/wechat.png',
+            'image' => '/plugins/payment/images/wechat.png',
         ],
         // wechat pay cross country
         'wechatPayCc' => [
@@ -26,21 +26,21 @@ class Payment extends \Miaoxing\Plugin\BaseModel
             'type' => 'wechatPayCc',
             'name' => '微信跨境支付',
             'displayName' => '微信跨境支付',
-            'image' => '/assets/images/payments/v2/wechat.png',
+            'image' => '/plugins/payment/images/wechat.png',
         ],
         'alipayWap' => [
             'id' => 'alipayWap',
             'type' => 'alipayWap',
             'name' => '支付宝',
             'displayName' => '支付宝(新版)',
-            'image' => '/assets/images/payments/v2/alipay.png',
+            'image' => '/plugins/payment/images/alipay.png',
         ],
         'alipay' => [
             'id' => 'alipay',
             'type' => 'alipay',
             'name' => '支付宝',
             'displayName' => '支付宝(旧版)',
-            'image' => '/assets/images/payments/v2/alipay.png',
+            'image' => '/plugins/payment/images/alipay.png',
         ],
         'unionPay' => [
             'id' => 'unionPay',
@@ -54,14 +54,14 @@ class Payment extends \Miaoxing\Plugin\BaseModel
             'type' => 'tenpay',
             'name' => '财付通',
             'displayName' => '财付通',
-            'image' => '/assets/images/payments/v2/tenpay.png',
+            'image' => '/plugins/payment/images/tenpay.png',
         ],
         'cashOnDelivery' => [
             'id' => 'cashOnDelivery',
             'type' => 'cashOnDelivery',
             'name' => '货到付款',
             'displayName' => '货到付款',
-            'image' => '/assets/images/payments/v2/testpay.png',
+            'image' => '/plugins/payment/images/testpay.png',
         ],
         // 用于只在该平台预订,但是在线下或其他渠道交易的订单
         // TODO 正常使用后替代测试支付
@@ -70,14 +70,14 @@ class Payment extends \Miaoxing\Plugin\BaseModel
             'type' => 'external',
             'name' => '外部支付',
             'displayName' => '外部支付',
-            'image' => '/assets/images/payments/v2/testpay.png',
+            'image' => '/plugins/payment/images/testpay.png',
         ],
         'test' => [
             'id' => 'test',
             'type' => 'test',
             'name' => '测试支付',
             'displayName' => '测试支付',
-            'image' => '/assets/images/payments/v2/testpay.png',
+            'image' => '/plugins/payment/images/testpay.png',
         ],
     ];
 
