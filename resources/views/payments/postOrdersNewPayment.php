@@ -10,7 +10,7 @@
 
 <?= $block->js() ?>
 <script>
-  require(['assets/numeric'], function (numeric) {
+  require(['plugins/product/js/numeric'], function (numeric) {
     // 订单要超过多少才能使用余额
     var delaySlow = 5000;
     var minAmount = '1.00';
