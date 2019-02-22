@@ -1,5 +1,5 @@
 /* global WeixinJSBridge */
-define(['jquery-form'], function () {
+define(['plugins/app/libs/jquery-form/jquery.form'], function () {
   var Payments = function () {
     // do nothing.
   };
