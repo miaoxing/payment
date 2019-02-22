@@ -59,7 +59,7 @@
 
 <?= $block->js() ?>
 <script>
-  require(['plugins/admin/js/data-table', 'form'], function () {
+  require(['plugins/admin/js/data-table', 'plugins/admin/js/form'], function () {
     var recordTable = $('#record-table').dataTable({
       ajax: {
         url: $.url('admin/payments.json')

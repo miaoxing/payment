@@ -122,7 +122,7 @@
 
 <?= $block->js() ?>
 <script>
-  require(['plugins/payment/js/admin/payments', 'form', 'ueditor'], function (payment) {
+  require(['plugins/payment/js/admin/payments', 'plugins/admin/js/form', 'ueditor'], function (payment) {
     payment.edit({
       data: <?= $payment->toJson() ?>
     });
