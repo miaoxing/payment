@@ -52,7 +52,7 @@
       商户私钥证书
     </label>
     <div class="col-lg-4">
-      <p class="form-control-static">请将"商户私钥证书"(pfx格式)提供给开发人员部署</p>
+      <p class="form-control-plaintext">请将"商户私钥证书"(pfx格式)提供给开发人员部署</p>
     </div>
   </div>
 </div>

@@ -50,7 +50,7 @@
     </label>
 
     <div class="col-lg-4">
-      <p class="form-control-static"><?= $req->getUrlFor($url('orders/')) ?></p>
+      <p class="form-control-plaintext"><?= $req->getUrlFor($url('orders/')) ?></p>
     </div>
 
     <label class="col-lg-6 help-text">
