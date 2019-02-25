@@ -54,13 +54,13 @@
             每购买
           </div>
           <div class="col-auto">
-            <input type="text" class="form-control pull-left text-center t-3" name="baseMoney" id="base-money">
+            <input type="text" class="form-control float-left text-center t-3" name="baseMoney" id="base-money">
           </div>
           <div class="col-auto">
             元商品,可得积分
           </div>
           <div class="col-auto">
-            <input type="text" class="form-control pull-left text-center t-3" name="scoreRate" id="score-rate">
+            <input type="text" class="form-control float-left text-center t-3" name="scoreRate" id="score-rate">
           </div>
           <div class="col-auto">
             (不满部分则去除不计)
