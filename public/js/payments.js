@@ -125,7 +125,7 @@ define(['plugins/app/libs/jquery-form/jquery.form'], function () {
     var checkPay = function () {
       // Loading效果
       if (showMessage !== false) {
-        $.loading({content: '从微信获取支付结果...第' + time + '次'}).loading('show');
+        $.loading('从微信获取支付结果...第' + time + '次');
       }
 
       // 支付成功
