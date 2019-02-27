@@ -4,7 +4,7 @@
 
 <span class="payment-title">请选择支付方式</span>
 
-<ul class="list list-link list-indented payment-list">
+<ul class="list list-indented payment-list">
   <?php foreach ($payments as $i => $payment) : ?>
   <li>
     <a class="js-payment-item list-item" href="javascript:;">
