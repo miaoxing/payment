@@ -17,7 +17,7 @@
           </label>
         </div>
       </div>
-      <div class="list-col list-col-left payment-image">
+      <div class="list-col payment-image">
         <img src="<?= $payment['image'] ?>">
       </div>
       <div class="list-col list-middle">
