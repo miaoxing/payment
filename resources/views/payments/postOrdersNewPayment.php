@@ -1,6 +1,6 @@
 <ul class="list">
   <li class="js-balance-item balance-item order-form-group list-item">
-    <h4 class="list-heading">
+    <h4 class="list-title">
       使用 <input class="js-balance-amount balance-amount order-form-input" type="text" name="balanceAmount"
         value="<?= $balanceAmount ?>"> 元余额支付
       <small class="nowrap">余额<?= $curUser['money'] ?>元</small>
