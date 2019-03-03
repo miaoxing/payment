@@ -21,7 +21,7 @@
         <img src="<?= $payment['image'] ?>">
       </div>
       <div class="list-col list-middle">
-        <h4 class="list-item-title">
+        <h4 class="list-title">
           <?= $payment['name'] ?>
         </h4>
       </div>
