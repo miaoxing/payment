@@ -9,12 +9,11 @@
   <li>
     <a class="js-payment-item list-item" href="javascript:;">
       <div class="list-col list-middle payment-checkbox">
-        <div class="checkbox checkbox-circle checkbox-success">
-          <label>
-            <input class="js-payment-id payType" type="checkbox" name="payType"
-              value="<?= $payment['id'] ?>" <?= $i == 0 ? 'checked' : '' ?>>
-            <span class="checkbox-label"></span>
-          </label>
+        <div class="custom-control custom-checkbox custom-checkbox-success">
+          <input class="js-payment-id payType custom-control-input" type="checkbox" name="payType"
+            id="pay-type-<?= $payment['id'] ?>"
+            value="<?= $payment['id'] ?>" <?= $i == 0 ? 'checked' : '' ?>>
+          <label class="custom-control-label" for="pay-type-<?= $payment['id'] ?>"></label>
         </div>
       </div>
       <div class="list-col payment-image">
