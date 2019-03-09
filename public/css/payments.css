@@ -34,7 +34,7 @@
 }
 
 .payment-checkbox {
-  width: 30px
+  flex: 0 0 30px;
 }
 
 .payment-checkbox .checkbox {
