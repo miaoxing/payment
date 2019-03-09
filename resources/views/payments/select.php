@@ -8,7 +8,7 @@
   <?php foreach ($payments as $i => $payment) : ?>
   <li>
     <a class="js-payment-item list-item" href="javascript:;">
-      <div class="list-col list-middle payment-checkbox">
+      <div class="list-col align-self-center payment-checkbox">
         <div class="custom-control custom-checkbox custom-checkbox-success">
           <input class="js-payment-id payType custom-control-input" type="checkbox" name="payType"
             id="pay-type-<?= $payment['id'] ?>"
@@ -19,7 +19,7 @@
       <div class="list-col payment-image">
         <img src="<?= $payment['image'] ?>">
       </div>
-      <div class="list-col list-middle">
+      <div class="list-col align-self-center">
         <h4 class="list-title">
           <?= $payment['name'] ?>
         </h4>
