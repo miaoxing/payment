@@ -175,7 +175,7 @@ class Alipay extends Base
      * @param array $signData
      * @return array
      */
-    public function refund($data, $signData = [])
+    public function refund($data = [], array $signData = [])
     {
         //服务器异步通知页面路径
         $notifyUrl = $this->url->full('alipay/refund-notify');
