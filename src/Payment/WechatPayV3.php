@@ -440,7 +440,7 @@ class WechatPayV3 extends Base
     /**
      * {@inheritdoc}
      */
-    public function refund($data, $signData = [])
+    public function refund($data = [], array $signData = [])
     {
         $data += [
             'orderNo' => '', // 订单编号
