@@ -10,7 +10,7 @@
 <script>
   require(['plugins/product/js/numeric'], function (numeric) {
     // 订单要超过多少才能使用余额
-    var delaySlow = 5000;
+    var delaySlow = 5;
     var minAmount = '1.00';
     var userMoney = <?= $curUser['money'] ?>;
     var $amount = $('.js-balance-amount');
