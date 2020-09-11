@@ -1,5 +1,6 @@
 {
   "name": "miaoxing/payment",
+  "type": "miaoxing-plugin",
   "description": "Miaoxing Payment Plugin",
   "keywords": [
     "miaoxing", "payment"
@@ -20,5 +21,15 @@
     }
   },
   "minimum-stability": "dev",
-  "prefer-stable": true
+  "prefer-stable": true,
+  "extra": {
+    "installer-types": [
+      "miaoxing-plugin"
+    ],
+    "installer-paths": {
+      "plugins/{$name}/": [
+        "type:miaoxing-plugin"
+      ]
+    }
+  }
 }
