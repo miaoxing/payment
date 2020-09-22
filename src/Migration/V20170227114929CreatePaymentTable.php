@@ -2,7 +2,7 @@
 
 namespace Miaoxing\Payment\Migration;
 
-use Miaoxing\Plugin\BaseMigration;
+use Wei\Migration\BaseMigration;
 
 class V20170227114929CreatePaymentTable extends BaseMigration
 {
