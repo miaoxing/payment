@@ -3,11 +3,12 @@
   "type": "miaoxing-plugin",
   "description": "Miaoxing Payment Plugin",
   "keywords": [
-    "miaoxing", "payment"
+    "miaoxing",
+    "payment"
   ],
   "license": "MIT",
   "require": {
-    "miaoxing/app": "^0.2.2",
+    "miaoxing/app": "^0.2.3",
     "miaoxing/product": "^0.1.0"
   },
   "autoload": {
