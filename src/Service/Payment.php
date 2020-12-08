@@ -4,7 +4,7 @@ namespace Miaoxing\Payment\Service;
 
 use Miaoxing\Order\Service\Order;
 
-class Payment extends \Miaoxing\Plugin\BaseModel
+class Payment extends \Miaoxing\Plugin\BaseService
 {
     protected $data = [
         'sort' => 50,
