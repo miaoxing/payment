@@ -120,9 +120,8 @@ class Payment extends \Miaoxing\Plugin\BaseService
             // 无支付方式无需从数据库读取
             return $this()->fromArray(['id' => 'none'])->getService();
         } else {
-            return $this()->cache()
+            return $this()
                 ->setCacheKey($this->getRecordCacheKey($id))
-                ->tags(false)
                 ->findOneById($id)
                 ->getService();
         }
