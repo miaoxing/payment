@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "twinh",
   "license": "MIT",
+  "workspaces": [
+    "plugins/*"
+  ],
   "jest": {
     "preset": "jest-preset-miaoxing"
   },
