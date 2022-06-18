@@ -3,6 +3,7 @@
 namespace Miaoxing\Payment;
 
 use Miaoxing\Address\Service\Address;
+use Miaoxing\Admin\Service\AdminMenu;
 use Miaoxing\Order\Service\Order;
 
 class PaymentPlugin extends \Miaoxing\Plugin\BasePlugin
@@ -15,13 +16,9 @@ class PaymentPlugin extends \Miaoxing\Plugin\BasePlugin
 
     protected $id = 14;
 
-    public function onAdminNavGetNavs(&$navs, &$categories, &$subCategories)
+    public function onAdminMenuGetMenus(AdminMenu $menu)
     {
-        $navs[] = [
-            'parentId' => 'orders-service',
-            'url' => 'admin/payments',
-            'name' => '支付接口管理',
-        ];
+        $menu->child('setting')->addChild()->setLabel('支付接口管理')->setUrl('admin/payments');
     }
 
     public function onPostOrdersNewPayment(Order $order)
