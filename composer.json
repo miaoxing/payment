@@ -23,6 +23,12 @@
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true,
+      "phpstan/extension-installer": true
+    }
+  },
   "extra": {
     "require-ci": {
       "miaoxing/dev": "miaoxing/dev as 8.x-dev",
