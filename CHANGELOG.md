@@ -1,3 +1,19 @@
+## [0.1.30](https://github.com/miaoxing/payment/compare/v0.1.29...v0.1.30) (2022-07-02)
+
+
+### Bug Fixes
+
+* 解决 composer 2.2+ 默认不启用插件导致安装路径错误 ([e8ee74c](https://github.com/miaoxing/payment/commit/e8ee74c35d58a3751b633bff084bc78b9bfb3cad))
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/app:** upgrade from `0.6.5` to `0.6.6`
+* **@miaoxing/product:** upgrade from `0.4.4` to `0.4.5`
+
 ## [0.1.29](https://github.com/miaoxing/payment/compare/v0.1.28...v0.1.29) (2022-07-01)
 
 
