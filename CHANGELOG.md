@@ -1,3 +1,14 @@
+## [0.1.38](https://github.com/miaoxing/payment/compare/v0.1.37...v0.1.38) (2023-01-31)
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/app:** upgrade from `0.6.12` to `0.6.13`
+* **@miaoxing/product:** upgrade from `0.4.12` to `0.4.13`
+
 ## [0.1.37](https://github.com/miaoxing/payment/compare/v0.1.36...v0.1.37) (2023-01-01)
 
 
