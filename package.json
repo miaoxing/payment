@@ -1,6 +1,6 @@
 {
   "name": "@miaoxing/payment",
-  "version": "0.1.43",
+  "version": "0.1.44",
   "private": true,
   "main": "index.js",
   "author": "twinh",
