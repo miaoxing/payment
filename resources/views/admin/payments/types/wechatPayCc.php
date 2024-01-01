@@ -1,1 +1,3 @@
-<?php require 'wechatPayV3.php';
+<?php
+
+require 'wechatPayV3.php';

@@ -3,7 +3,6 @@
 namespace Miaoxing\Payment\Payment;
 
 use Miaoxing\Order\Service\Order;
-use ReflectionClass;
 
 /**
  * @property \Wei\Request $request
@@ -48,7 +47,7 @@ class WechatPayV3 extends Base
 
     protected function getName()
     {
-        $parts = explode('\\', get_class($this));
+        $parts = explode('\\', static::class);
 
         return lcfirst(end($parts));
     }
@@ -97,7 +96,7 @@ class WechatPayV3 extends Base
         }
 
         // 3. 检查业务是否正确
-        if ($result['result_code'] != 'SUCCESS') {
+        if ('SUCCESS' != $result['result_code']) {
             $this->notifyResult = ['return_code' => 'FAIL', 'return_msg' => $result['err_code_des']];
             $this->logger->warning('Pay fail, result code fail', [
                 'content' => $content,
@@ -228,14 +227,14 @@ class WechatPayV3 extends Base
         }
 
         // Step2 如果是新用户,记录到用户表,并设置用户登录态
-        $isValid = $data['is_subscribe'] === 'Y';
+        $isValid = 'Y' === $data['is_subscribe'];
         $wei->curUser->loginBy(['wechatOpenId' => $data['openid']], ['isValid' => $isValid]);
 
         // Step3 根据数据生成订单
-        if ($data['product_id'][0] == '-') {
+        if ('-' == $data['product_id'][0]) {
             // Step3.1 支付的是已有的订单
             $orderId = substr($data['product_id'], 1);
-            /** @var \Miaoxing\Order\Service\Order $order */
+            /** @var Order $order */
             $order = wei()->order()->findById($orderId);
             if (!$order) {
                 return $api->responseNativePay([
@@ -301,7 +300,7 @@ class WechatPayV3 extends Base
     /**
      * 通过订单生成prepayId
      *
-     * @param \Miaoxing\Order\Service\Order $order
+     * @param Order $order
      * @param array $data
      * @param array $testData
      * @return array
@@ -315,7 +314,7 @@ class WechatPayV3 extends Base
         // 2. 生成prepay_id
         $body = mb_strlen($order['name']) > 28 ? mb_substr($order['name'], 0, 28) . '...' : $order['name'];
 
-        $reflection = new ReflectionClass($this);
+        $reflection = new \ReflectionClass($this);
         $type = lcfirst($reflection->getShortName());
 
         $data += [
@@ -363,7 +362,7 @@ class WechatPayV3 extends Base
         $signData = $testSignData + [
                 'appid' => $this->appId,
                 'mch_id' => $this->mchId,
-                'time_stamp' => strval(time()),
+                'time_stamp' => (string) time(),
                 'nonce_str' => $this->generateNonceStr(32),
                 'product_id' => $productId,
             ];
@@ -374,7 +373,7 @@ class WechatPayV3 extends Base
         // 生成短地址
         if ($shortUrl) {
             $result = $api->shortUrl($url);
-            if ($result['code'] !== 1) {
+            if (1 !== $result['code']) {
                 wei()->logger->alert($result);
                 $url = false;
             } else {
@@ -455,7 +454,7 @@ class WechatPayV3 extends Base
         $signData += [
             'appid' => $this->appId,
             'mch_id' => $this->mchId,
-            //'device_info' => '', 如果是空,不加入签名
+            // 'device_info' => '', 如果是空,不加入签名
             'nonce_str' => $this->generateNonceStr(),
             'transaction_id' => $data['outOrderNo'],
             'out_trade_no' => $data['orderNo'],
@@ -473,7 +472,7 @@ class WechatPayV3 extends Base
         }
 
         // 如果已在商户平台退款,后台再退款微信会返回状态错误,需要加上更详细的提醒
-        if ($ret['err_code'] === 'TRADE_STATE_ERROR') {
+        if ('TRADE_STATE_ERROR' === $ret['err_code']) {
             $ret['message'] = '，请检查您是否已在微信商户平台退过款';
         }
 
@@ -503,7 +502,7 @@ class WechatPayV3 extends Base
     /**
      * 附加更改时间,每次都是新的ID,解决微信支付不能改价的问题
      *
-     * @param \Miaoxing\Order\Service\Order $order
+     * @param Order $order
      * @return string
      */
     public function getOutTradeNo(Order $order)

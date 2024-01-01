@@ -40,6 +40,7 @@ class Test extends Base
 
     /**
      * 测试支付返回空数据,避免页面布局改变
+     * @param mixed $result
      */
     public function response($result)
     {

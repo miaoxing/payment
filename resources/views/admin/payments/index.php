@@ -9,9 +9,9 @@
   </button>
 
   <div class="dropdown-menu dropdown-menu-right">
-    <?php foreach (wei()->payment->getTypes() as $type => $data) : ?>
+    <?php foreach (wei()->payment->getTypes() as $type => $data) { ?>
       <a class="dropdown-item" href="<?= $url('admin/payments/new', ['type' => $type]) ?>"><?= $data['displayName'] ?></a>
-    <?php endforeach ?>
+    <?php } ?>
   </div>
 
 </div>

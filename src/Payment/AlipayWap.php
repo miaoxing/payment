@@ -150,7 +150,7 @@ class AlipayWap extends Base
             return $this->err(['message' => '支付宝返回错误信息:' . $response->getMessage()] + $data);
         }
 
-        if ($response->getAlipayResponse('fund_change') !== 'Y') {
+        if ('Y' !== $response->getAlipayResponse('fund_change')) {
             return $this->err(['message' => '支付宝返回资金未变化,请检查是否已经退过款'] + $data);
         }
 

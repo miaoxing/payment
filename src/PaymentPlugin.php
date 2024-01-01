@@ -93,7 +93,7 @@ class PaymentPlugin extends \Miaoxing\Plugin\BasePlugin
      */
     public function onPostOrderCancel(Order $order, $source)
     {
-        if ($source == 'timeout' && (float) $order['balanceAmount']) {
+        if ('timeout' == $source && (float) $order['balanceAmount']) {
             wei()->transaction->refund($order['balanceAmount'], [
                 'recordId' => $order['id'],
                 'note' => '订单超时取消,返还支付余额',

@@ -5,14 +5,14 @@
 <span class="payment-title">请选择支付方式</span>
 
 <ul class="list list-indented payment-list">
-  <?php foreach ($payments as $i => $payment) : ?>
+  <?php foreach ($payments as $i => $payment) { ?>
   <li>
     <a class="js-payment-item list-item" href="javascript:;">
       <div class="list-col align-self-center payment-checkbox">
         <div class="custom-control custom-checkbox custom-checkbox-success">
           <input class="js-payment-id payType custom-control-input" type="checkbox" name="payType"
             id="pay-type-<?= $payment['id'] ?>"
-            value="<?= $payment['id'] ?>" <?= $i == 0 ? 'checked' : '' ?>>
+            value="<?= $payment['id'] ?>" <?= 0 == $i ? 'checked' : '' ?>>
           <label class="custom-control-label" for="pay-type-<?= $payment['id'] ?>"></label>
         </div>
       </div>
@@ -26,7 +26,7 @@
       </div>
     </a>
   </li>
-  <?php endforeach ?>
+  <?php } ?>
 </ul>
 
 <?= $block->js() ?>

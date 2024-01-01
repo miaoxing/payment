@@ -30,7 +30,7 @@ class TenpayPc extends Base
     {
         $this->setOption($options);
 
-        require_once('vendor/tenpay_api_b2c/classes/RequestHandler.class.php');
+        require_once 'vendor/tenpay_api_b2c/classes/RequestHandler.class.php';
 
         // 创建支付请求对象
 
@@ -39,39 +39,39 @@ class TenpayPc extends Base
         $reqHandler->setKey($this->key);
         $reqHandler->setGateUrl('https://gw.tenpay.com/gateway/pay.htm');
 
-        //----------------------------------------
-        //设置支付参数
-        //----------------------------------------
-        $reqHandler->setParameter('total_fee', $this->orderAmount * 100); //总金额
-        //用户ip
-        $reqHandler->setParameter('spbill_create_ip', $this->request->getServer('REMOTE_ADDR')); //客户端IP
-        $reqHandler->setParameter('return_url', $this->returnUrl); //支付成功后返回
+        // ----------------------------------------
+        // 设置支付参数
+        // ----------------------------------------
+        $reqHandler->setParameter('total_fee', $this->orderAmount * 100); // 总金额
+        // 用户ip
+        $reqHandler->setParameter('spbill_create_ip', $this->request->getServer('REMOTE_ADDR')); // 客户端IP
+        $reqHandler->setParameter('return_url', $this->returnUrl); // 支付成功后返回
         $reqHandler->setParameter('partner', $this->partner);
         $reqHandler->setParameter('out_trade_no', $this->orderNo);
         $reqHandler->setParameter('notify_url', $this->notifyUrl);
         $reqHandler->setParameter('body', $this->orderName);
-        $reqHandler->setParameter('bank_type', 'DEFAULT'); //银行类型，默认为财付通
-        $reqHandler->setParameter('fee_type', '1'); //币种
-        //系统可选参数
-        $reqHandler->setParameter('sign_type', 'MD5'); //签名方式，默认为MD5，可选RSA
-        $reqHandler->setParameter('service_version', '1.0'); //接口版本号
-        $reqHandler->setParameter('input_charset', 'UTF-8'); //字符集
-        $reqHandler->setParameter('sign_key_index', '1'); //密钥序号
+        $reqHandler->setParameter('bank_type', 'DEFAULT'); // 银行类型，默认为财付通
+        $reqHandler->setParameter('fee_type', '1'); // 币种
+        // 系统可选参数
+        $reqHandler->setParameter('sign_type', 'MD5'); // 签名方式，默认为MD5，可选RSA
+        $reqHandler->setParameter('service_version', '1.0'); // 接口版本号
+        $reqHandler->setParameter('input_charset', 'UTF-8'); // 字符集
+        $reqHandler->setParameter('sign_key_index', '1'); // 密钥序号
 
-        //业务可选参数
-        $reqHandler->setParameter('attach', ''); //附件数据，原样返回就可以了
-        $reqHandler->setParameter('product_fee', ''); //商品费用
-        $reqHandler->setParameter('transport_fee', ''); //物流费用
-        $reqHandler->setParameter('time_start', date('YmdHis')); //订单生成时间
-        $reqHandler->setParameter('time_expire', ''); //订单失效时间
+        // 业务可选参数
+        $reqHandler->setParameter('attach', ''); // 附件数据，原样返回就可以了
+        $reqHandler->setParameter('product_fee', ''); // 商品费用
+        $reqHandler->setParameter('transport_fee', ''); // 物流费用
+        $reqHandler->setParameter('time_start', date('YmdHis')); // 订单生成时间
+        $reqHandler->setParameter('time_expire', ''); // 订单失效时间
 
-        $reqHandler->setParameter('buyer_id', ''); //买方财付通帐号
-        $reqHandler->setParameter('goods_tag', ''); //商品标记
+        $reqHandler->setParameter('buyer_id', ''); // 买方财付通帐号
+        $reqHandler->setParameter('goods_tag', ''); // 商品标记
 
-        //请求的URL
+        // 请求的URL
         $reqUrl = $reqHandler->getRequestURL();
 
-        //获取debug信息,建议把请求和debug信息写入日志，方便定位问题
+        // 获取debug信息,建议把请求和debug信息写入日志，方便定位问题
         $debugInfo = $reqHandler->getDebugInfo();
         $this->logger->debug('Request URL:' . $reqUrl);
         $this->logger->debug($debugInfo);
@@ -82,10 +82,10 @@ class TenpayPc extends Base
 
     public function verifyNotify()
     {
-        require('vendor/tenpay_api_b2c/classes/ResponseHandler.class.php');
-        require('vendor/tenpay_api_b2c/classes/RequestHandler.class.php');
-        require('vendor/tenpay_api_b2c/classes/client/ClientResponseHandler.class.php');
-        require('vendor/tenpay_api_b2c/classes/client/TenpayHttpClient.class.php');
+        require 'vendor/tenpay_api_b2c/classes/ResponseHandler.class.php';
+        require 'vendor/tenpay_api_b2c/classes/RequestHandler.class.php';
+        require 'vendor/tenpay_api_b2c/classes/client/ClientResponseHandler.class.php';
+        require 'vendor/tenpay_api_b2c/classes/client/TenpayHttpClient.class.php';
 
         // 创建支付应答对象
 
@@ -136,9 +136,9 @@ class TenpayPc extends Base
                 // 判断签名及结果
                 // 只有签名正确,retcode为0，trade_state为0才是支付成功
                 if ($queryRes->isTenpaySign()
-                    && $queryRes->getParameter('retcode') == '0'
-                    && $queryRes->getParameter('trade_state') == '0'
-                    && $queryRes->getParameter('trade_mode') == '1'
+                    && '0' == $queryRes->getParameter('retcode')
+                    && '0' == $queryRes->getParameter('trade_state')
+                    && '1' == $queryRes->getParameter('trade_mode')
                 ) {
                     // 取结果参数做业务处理
                     $this->orderNo = $queryRes->getParameter('out_trade_no');
@@ -153,16 +153,16 @@ class TenpayPc extends Base
                     // 计算总的金额
                     $this->orderAmount = ($totalFee + $discount) / 100;
 
-                    //处理数据库逻辑
-                    //注意交易单不要重复处理
-                    //注意判断返回金额
+                    // 处理数据库逻辑
+                    // 注意交易单不要重复处理
+                    // 注意判断返回金额
                     return true;
                 } else {
                     // 错误时，返回结果可能没有签名，写日志trade_state、retcode、retmsg看失败详情。
                     $this->logger->error(
                         '验证签名失败 或 业务错误信息:trade_state=' .
                         $queryRes->getParameter('trade_state') .
-                        ',retcode=' . $queryRes->getParameter('retcode').
+                        ',retcode=' . $queryRes->getParameter('retcode') .
                         ',retmsg=' . $queryRes->getParameter('retmsg')
                     );
 

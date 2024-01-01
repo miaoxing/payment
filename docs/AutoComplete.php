@@ -1,7 +1,6 @@
 <?php
 
 namespace plugins\payment\docs {
-
     use Miaoxing\Payment\Payment\Base;
     use Miaoxing\Payment\Service\Payment;
 
@@ -15,9 +14,8 @@ namespace plugins\payment\docs {
 }
 
 namespace {
-
     /**
-     * @return \plugins\payment\docs\AutoComplete
+     * @return plugins\payment\docs\AutoComplete
      */
     function wei()
     {

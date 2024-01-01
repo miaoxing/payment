@@ -189,7 +189,7 @@ abstract class Base extends \Miaoxing\Plugin\BaseService
 
     public function getFormFile()
     {
-        $parts = explode('\\', get_class($this));
+        $parts = explode('\\', static::class);
         $name = lcfirst(end($parts));
 
         return '@payment/admin/payments/types/' . $name . '.php';

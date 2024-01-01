@@ -37,20 +37,20 @@ class Tenpay extends Base
         $reqHandler->setGateUrl('http://wap.tenpay.com/cgi-bin/wappayv2.0/wappay_init.cgi');
 
         $httpClient = new \TenpayHttpClient();
-        //应答对象
+        // 应答对象
         $resHandler = new \ClientResponseHandler();
-        //----------------------------------------
-        //设置支付参数
-        //----------------------------------------
-        $reqHandler->setParameter('total_fee', $this->orderAmount * 100); //总金额
-        //用户ip
-        $reqHandler->setParameter('spbill_create_ip', $this->request->getServer('REMOTE_ADDR')); //客户端IP
-        $reqHandler->setParameter('ver', '2.0'); //版本类型
-        $reqHandler->setParameter('bank_type', '0'); //银行类型，财付通填写0
-        $reqHandler->setParameter('callback_url', $this->returnUrl); //交易完成后跳转的URL
-        $reqHandler->setParameter('bargainor_id', $this->partner); //商户号
-        $reqHandler->setParameter('sp_billno', $this->orderNo); //商户订单号
-        $reqHandler->setParameter('notify_url', $this->notifyUrl); //接收财付通通知的URL，需绝对路径
+        // ----------------------------------------
+        // 设置支付参数
+        // ----------------------------------------
+        $reqHandler->setParameter('total_fee', $this->orderAmount * 100); // 总金额
+        // 用户ip
+        $reqHandler->setParameter('spbill_create_ip', $this->request->getServer('REMOTE_ADDR')); // 客户端IP
+        $reqHandler->setParameter('ver', '2.0'); // 版本类型
+        $reqHandler->setParameter('bank_type', '0'); // 银行类型，财付通填写0
+        $reqHandler->setParameter('callback_url', $this->returnUrl); // 交易完成后跳转的URL
+        $reqHandler->setParameter('bargainor_id', $this->partner); // 商户号
+        $reqHandler->setParameter('sp_billno', $this->orderNo); // 商户订单号
+        $reqHandler->setParameter('notify_url', $this->notifyUrl); // 接收财付通通知的URL，需绝对路径
         $reqHandler->setParameter('desc', $this->orderName);
         $reqHandler->setParameter('desc', $this->orderName);
         $reqHandler->setParameter('attach', '');
@@ -66,7 +66,7 @@ class Tenpay extends Base
         // 后台调用
         if ($httpClient->call()) {
             $resHandler->setContent($httpClient->getResContent());
-            //获得的token_id，用于支付请求
+            // 获得的token_id，用于支付请求
             $tokenId = $resHandler->getParameter('token_id');
             $reqHandler->setParameter('token_id', $tokenId);
 
@@ -80,10 +80,10 @@ class Tenpay extends Base
             $message .= 'notify url: ' . $this->notifyUrl . "\n\n";
             $this->logger->log($tokenId ? 'info' : 'alert', $message);
 
-            //请求的URL
-            //$reqHandler->setGateUrl("https://wap.tenpay.com/cgi-bin/wappayv2.0/wappay_gate.cgi");
-            //此次请求只需带上参数token_id就可以了，$reqUrl和$reqUrl2效果是一样的
-            //$reqUrl = $reqHandler->getRequestURL();
+            // 请求的URL
+            // $reqHandler->setGateUrl("https://wap.tenpay.com/cgi-bin/wappayv2.0/wappay_gate.cgi");
+            // 此次请求只需带上参数token_id就可以了，$reqUrl和$reqUrl2效果是一样的
+            // $reqUrl = $reqHandler->getRequestURL();
             $reqUrl = 'http://wap.tenpay.com/cgi-bin/wappayv2.0/wappay_gate.cgi?token_id=' . $tokenId;
 
             // 渲染跳转页面的视图
@@ -108,23 +108,23 @@ class Tenpay extends Base
         // 获取debug信息,建议把debug信息写入日志，方便定位问题
         $this->logger->debug($resHandler->getDebugInfo());
 
-        //判断签名
+        // 判断签名
         if ($isTenpaySign) {
-            //商户订单号
+            // 商户订单号
             $this->orderNo = $resHandler->getParameter('sp_billno');
 
-            //财付通交易单号
+            // 财付通交易单号
             $this->outOrderNo = $resHandler->getParameter('transaction_id');
 
-            //金额,以分为单位
+            // 金额,以分为单位
             $this->orderAmount = $resHandler->getParameter('total_fee') / 100;
 
-            //支付结果
+            // 支付结果
             $payResult = $resHandler->getParameter('pay_result');
 
             return '0' == $payResult;
         } else {
-            //回调签名错误
+            // 回调签名错误
             $this->logger->info('Sign error');
 
             return false;

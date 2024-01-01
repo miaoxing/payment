@@ -76,36 +76,36 @@ class Alipay extends Base
 
         // **req_data详细信息**
 
-        //服务器异步通知页面路径
+        // 服务器异步通知页面路径
         $notifyUrl = $this->notifyUrl;
-        //需http://格式的完整路径，不允许加?id=123这类自定义参数
+        // 需http://格式的完整路径，不允许加?id=123这类自定义参数
 
-        //页面跳转同步通知页面路径
+        // 页面跳转同步通知页面路径
         $callbackUrl = $this->returnUrl;
-        //需http://格式的完整路径，不允许加?id=123这类自定义参数
+        // 需http://格式的完整路径，不允许加?id=123这类自定义参数
 
-        //操作中断返回地址
+        // 操作中断返回地址
         $merchantUrl = $this->errorUrl;
-        //用户付款中途退出返回商户的地址。需http://格式的完整路径，不允许加?id=123这类自定义参数
+        // 用户付款中途退出返回商户的地址。需http://格式的完整路径，不允许加?id=123这类自定义参数
 
-        //卖家支付宝帐户
+        // 卖家支付宝帐户
         $sellerEmail = $this->sellerEmail;
-        //必填
+        // 必填
 
-        //商户订单号
+        // 商户订单号
         $outTradeNo = $this->orderNo;
-        //商户网站订单系统中唯一订单号，必填
+        // 商户网站订单系统中唯一订单号，必填
 
         // 订单名称 替换&<>为下划线
         // 如果不转义,拼出来的xml结构错误,如果转义,支付宝会返回结构错误的xml
         $subject = strtr($this->orderName, ['&' => '_', '<' => '_', '>' => '_']);
-        //必填
+        // 必填
 
-        //付款金额
+        // 付款金额
         $totalFee = $this->orderAmount;
-        //必填
+        // 必填
 
-        //请求业务参数详细
+        // 请求业务参数详细
         $reqData = '<direct_trade_create_req><notify_url>'
             . $notifyUrl . '</notify_url><call_back_url>'
             . $callbackUrl . '</call_back_url><seller_account_name>'
@@ -114,9 +114,9 @@ class Alipay extends Base
             . $subject . '</subject><total_fee>'
             . $totalFee . '</total_fee><merchant_url>'
             . $merchantUrl . '</merchant_url></direct_trade_create_req>';
-        //必填
+        // 必填
 
-        //构造要请求的参数数组，无需改动
+        // 构造要请求的参数数组，无需改动
         $paraToken = [
             'service' => 'alipay.wap.trade.create.direct',
             'partner' => trim($alipayConfig['partner']),
@@ -128,26 +128,26 @@ class Alipay extends Base
             '_input_charset' => trim(strtolower($alipayConfig['input_charset'])),
         ];
 
-        //建立请求
+        // 建立请求
         $alipaySubmit = new \AlipaySubmit($alipayConfig);
         $htmlText = $alipaySubmit->buildRequestHttp($paraToken);
 
-        //URLDECODE返回的信息
+        // URLDECODE返回的信息
         $htmlText = urldecode($htmlText);
 
-        //解析远程模拟提交后返回的信息
+        // 解析远程模拟提交后返回的信息
         $paraHtmlText = $alipaySubmit->parseResponse($htmlText);
 
-        //获取request_token
+        // 获取request_token
         $requestToken = $paraHtmlText['request_token'];
 
         // 根据授权码token调用交易接口alipay.wap.auth.authAndExecute
 
-        //业务详细
+        // 业务详细
         $reqData = '<auth_and_execute_req><request_token>' . $requestToken . '</request_token></auth_and_execute_req>';
-        //必填
+        // 必填
 
-        //构造要请求的参数数组，无需改动
+        // 构造要请求的参数数组，无需改动
         $parameter = [
             'service' => 'alipay.wap.auth.authAndExecute',
             'partner' => trim($alipayConfig['partner']),
@@ -177,14 +177,14 @@ class Alipay extends Base
      */
     public function refund($data = [], array $signData = [])
     {
-        //服务器异步通知页面路径
+        // 服务器异步通知页面路径
         $notifyUrl = $this->url->full('alipay/refund-notify');
-        //需http://格式的完整路径，不允许加?id=123这类自定义参数
+        // 需http://格式的完整路径，不允许加?id=123这类自定义参数
 
         $alipayConfig = wei()->alipaySubmit->getDefaultConfig();
-        $detailData = $data['outOrderNo'].'^'.$data['refundFee'].'^系统退款';
+        $detailData = $data['outOrderNo'] . '^' . $data['refundFee'] . '^系统退款';
 
-        //构造要请求的参数数组，无需改动
+        // 构造要请求的参数数组，无需改动
         $parameter = [
             'service' => 'refund_fastpay_by_platform_pwd',
             'partner' => trim($this->partner),
@@ -192,15 +192,15 @@ class Alipay extends Base
             '_input_charset' => trim(strtolower($alipayConfig['input_charset'])),
             'seller_email' => trim($this->sellerEmail),
             'refund_date' => date('Y-m-d h:i:s'),
-            'batch_no' => date('Ymd').rand(100, 999).$data['refundId'],
+            'batch_no' => date('Ymd') . rand(100, 999) . $data['refundId'],
             'batch_num' => 1,
             'detail_data' => $detailData,
         ];
 
-        //建立请求
+        // 建立请求
         $alipaySubmit = wei()->alipaySubmit;
 
-        //更新独立的配置
+        // 更新独立的配置
         $alipayConfig['partner'] = $this->partner;
         $alipayConfig['key'] = $this->key;
 
@@ -218,33 +218,33 @@ class Alipay extends Base
         //  计算得出通知验证结果
         $alipayNotify = new \AlipayNotify($alipayConfig);
         $verifyResult = $alipayNotify->verifyNotify();
-        //$verify_result = true;
-        if ($verifyResult) { //验证成功
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //请在这里加上商户的业务逻辑程序代
+        // $verify_result = true;
+        if ($verifyResult) { // 验证成功
+            // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            // 请在这里加上商户的业务逻辑程序代
 
-            //——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
+            // ——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
 
-            //解密（如果是RSA签名需要解密，如果是MD5签名则下面一行清注释掉）
-            if (strtoupper($alipayConfig['sign_type']) != 'MD5') {
+            // 解密（如果是RSA签名需要解密，如果是MD5签名则下面一行清注释掉）
+            if ('MD5' != strtoupper($alipayConfig['sign_type'])) {
                 $notifyData = decrypt($this->request->getPost('notify_data'));
             } else {
                 $notifyData = $this->request->getPost('notify_data');
             }
 
-            //获取支付宝的通知返回参数，可参考技术文档中服务器异步通知参数列表
+            // 获取支付宝的通知返回参数，可参考技术文档中服务器异步通知参数列表
 
-            //解析notify_data
-            //注意：该功能PHP5环境及以上支持，需开通curl、SSL等PHP配置环境。建议本地调试时使用PHP开发软件
+            // 解析notify_data
+            // 注意：该功能PHP5环境及以上支持，需开通curl、SSL等PHP配置环境。建议本地调试时使用PHP开发软件
             $doc = new \DOMDocument();
             $doc->loadXML($notifyData);
 
             if (!empty($doc->getElementsByTagName('notify')->item(0)->nodeValue)) {
-                //商户订单号
+                // 商户订单号
                 $this->orderNo = $doc->getElementsByTagName('out_trade_no')->item(0)->nodeValue;
-                //支付宝交易号
+                // 支付宝交易号
                 $this->outOrderNo = $doc->getElementsByTagName('trade_no')->item(0)->nodeValue;
-                //交易状态
+                // 交易状态
                 $this->status = $doc->getElementsByTagName('trade_status')->item(0)->nodeValue;
 
                 return true;
@@ -280,11 +280,11 @@ class Alipay extends Base
                 return false;
             }
 
-            //——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
+            // ——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
 
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         } else {
-            //验证失败
+            // 验证失败
             return false;
         }
     }
@@ -298,23 +298,23 @@ class Alipay extends Base
         $verifyResult = $alipayNotify->verifyReturn();
         if ($verifyResult) {
             // 验证成功
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //请在这里加上商户的业务逻辑程序代码
+            // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            // 请在这里加上商户的业务逻辑程序代码
 
-            //——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
-            //获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表
-            //商户订单号
+            // ——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
+            // 获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表
+            // 商户订单号
             $this->orderNo = $this->request->getQuery('out_trade_no');
 
-            //支付宝交易号
+            // 支付宝交易号
             $this->outOrderNo = $this->request->getQuery('trade_no');
 
-            //交易状态
+            // 交易状态
             $result = $this->request->getQuery('result');
 
-            //判断该笔订单是否在商户网站中已经做过处理
-            //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-            //如果有做过处理，不执行商户的业务程序
+            // 判断该笔订单是否在商户网站中已经做过处理
+            // 如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+            // 如果有做过处理，不执行商户的业务程序
             return true;
         } else {
             return false;
@@ -328,12 +328,12 @@ class Alipay extends Base
      * 说明：
      * 以下代码只是为了方便商户测试而提供的样例代码，商户可以根据自己网站的需要，按照技术文档编写,并非一定要使用该代码。
      * 该代码仅供学习和研究支付宝接口使用，只是提供一个参考。
-
+     *
      * 提示：如何获取安全校验码和合作身份者id
      * 1.用您的签约支付宝账号登录支付宝网站(www.alipay.com)
      * 2.点击“商家服务”(https://b.alipay.com/order/myorder.htm)
      * 3.点击“查询合作者身份(pid)”、“查询安全校验码(key)”
-
+     *
      * 安全校验码查看时，输入支付密码后，页面呈灰色的现象，怎么办？
      * 解决方法：
      * 1、检查浏览器配置，不让浏览器做弹框屏蔽设置
@@ -341,35 +341,35 @@ class Alipay extends Base
      */
     protected function getConfig()
     {
-        //↓↓↓↓↓↓↓↓↓↓请在这里配置您的基本信息↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-        //合作身份者id，以2088开头的16位纯数字
+        // ↓↓↓↓↓↓↓↓↓↓请在这里配置您的基本信息↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+        // 合作身份者id，以2088开头的16位纯数字
         $alipayConfig['partner'] = $this->partner;
 
-        //安全检验码，以数字和字母组成的32位字符
-        //如果签名方式设置为“MD5”时，请设置该参数
+        // 安全检验码，以数字和字母组成的32位字符
+        // 如果签名方式设置为“MD5”时，请设置该参数
         $alipayConfig['key'] = $this->key;
 
-        //商户的私钥（后缀是.pen）文件相对路径
-        //如果签名方式设置为“0001”时，请设置该参数
+        // 商户的私钥（后缀是.pen）文件相对路径
+        // 如果签名方式设置为“0001”时，请设置该参数
         $alipayConfig['private_key_path'] = 'key/rsa_private_key.pem';
 
-        //支付宝公钥（后缀是.pen）文件相对路径
-        //如果签名方式设置为“0001”时，请设置该参数
+        // 支付宝公钥（后缀是.pen）文件相对路径
+        // 如果签名方式设置为“0001”时，请设置该参数
         $alipayConfig['ali_public_key_path'] = 'key/alipay_public_key.pem';
 
-        //↑↑↑↑↑↑↑↑↑↑请在这里配置您的基本信息↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+        // ↑↑↑↑↑↑↑↑↑↑请在这里配置您的基本信息↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
-        //签名方式 不需修改
+        // 签名方式 不需修改
         $alipayConfig['sign_type'] = 'MD5';
 
-        //字符编码格式 目前支持 gbk 或 utf-8
+        // 字符编码格式 目前支持 gbk 或 utf-8
         $alipayConfig['input_charset'] = 'utf-8';
 
-        //ca证书路径地址，用于curl中ssl校验
-        //请保证cacert.pem文件在当前文件夹目录中
-        $alipayConfig['cacert'] = getcwd().'\\cacert.pem';
+        // ca证书路径地址，用于curl中ssl校验
+        // 请保证cacert.pem文件在当前文件夹目录中
+        $alipayConfig['cacert'] = getcwd() . '\\cacert.pem';
 
-        //访问模式,根据自己的服务器是否支持ssl访问，若支持请选择https；若不支持请选择http
+        // 访问模式,根据自己的服务器是否支持ssl访问，若支持请选择https；若不支持请选择http
         $alipayConfig['transport'] = 'http';
 
         return $alipayConfig;
@@ -377,12 +377,12 @@ class Alipay extends Base
 
     public function isComplete()
     {
-        return $this->status == 'TRADE_FINISHED' || $this->status == 'TRADE_SUCCESS';
+        return 'TRADE_FINISHED' == $this->status || 'TRADE_SUCCESS' == $this->status;
     }
 
     public function isPending()
     {
-        return $this->status == 'WAIT_BUYER_PAY';
+        return 'WAIT_BUYER_PAY' == $this->status;
     }
 
     public function getPartner()

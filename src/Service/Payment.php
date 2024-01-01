@@ -116,7 +116,7 @@ class Payment extends \Miaoxing\Plugin\BaseService
      */
     public function createService($id)
     {
-        if ($id == 'none') {
+        if ('none' == $id) {
             // 无支付方式无需从数据库读取
             return $this()->fromArray(['id' => 'none'])->getService();
         } else {

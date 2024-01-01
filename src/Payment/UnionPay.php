@@ -73,29 +73,29 @@ class UnionPay extends Base
          */
         $params = [
             // 以下信息非特殊情况不需要改动
-            'version' => SDKConfig::getSDKConfig()->version,                 //版本号
-            'encoding' => 'utf-8',                  //编码方式
-            'txnType' => '01',                      //交易类型
-            'txnSubType' => '01',                  //交易子类
-            'bizType' => '000201',                  //业务类型
-            'frontUrl' => $options['returnUrl'],  //前台通知地址
-            'backUrl' => $options['notifyUrl'],      //后台通知地址
-            'signMethod' => SDKConfig::getSDKConfig()->signMethod,                  //签名方法
-            'channelType' => '08',                  //渠道类型，07-PC，08-手机
-            'accessType' => '0',                  //接入类型
-            'currencyCode' => '156',              //交易币种，境内商户固定156
+            'version' => SDKConfig::getSDKConfig()->version,                 // 版本号
+            'encoding' => 'utf-8',                  // 编码方式
+            'txnType' => '01',                      // 交易类型
+            'txnSubType' => '01',                  // 交易子类
+            'bizType' => '000201',                  // 业务类型
+            'frontUrl' => $options['returnUrl'],  // 前台通知地址
+            'backUrl' => $options['notifyUrl'],      // 后台通知地址
+            'signMethod' => SDKConfig::getSDKConfig()->signMethod,                  // 签名方法
+            'channelType' => '08',                  // 渠道类型，07-PC，08-手机
+            'accessType' => '0',                  // 接入类型
+            'currencyCode' => '156',              // 交易币种，境内商户固定156
 
             // 以下信息需要填写
-            'merId' => $this->merId,        //商户代码，请改自己的测试商户号，此处默认取demo演示页面传递的参数
-            'orderId' => $options['orderNo'],    //商户订单号，8-32位数字字母，不能含“-”或“_”，此处默认取demo演示页面传递的参数，可以自行定制规则
-            'txnTime' => date('YmdHis'),    //订单发送时间，格式为YYYYMMDDhhmmss，取北京时间，此处默认取demo演示页面传递的参数
-            'txnAmt' => (string) ($options['orderAmount'] * 100), //交易金额，单位分，此处默认取demo演示页面传递的参数
+            'merId' => $this->merId,        // 商户代码，请改自己的测试商户号，此处默认取demo演示页面传递的参数
+            'orderId' => $options['orderNo'],    // 商户订单号，8-32位数字字母，不能含“-”或“_”，此处默认取demo演示页面传递的参数，可以自行定制规则
+            'txnTime' => date('YmdHis'),    // 订单发送时间，格式为YYYYMMDDhhmmss，取北京时间，此处默认取demo演示页面传递的参数
+            'txnAmt' => (string) ($options['orderAmount'] * 100), // 交易金额，单位分，此处默认取demo演示页面传递的参数
 
             // 订单超时时间。
             // 超过此时间后，除网银交易外，其他交易银联系统会拒绝受理，提示超时。 跳转银行网银交易如果超时后交易成功，会自动退款，大约5个工作日金额返还到持卡人账户。
             // 此时间建议取支付时的北京时间加15分钟。
             // 超过超时时间调查询接口应答origRespCode不是A6或者00的就可以判断为失败。
-            //'payTimeout' => date('YmdHis', strtotime('+15 minutes')),
+            // 'payTimeout' => date('YmdHis', strtotime('+15 minutes')),
 
             // 请求方保留域，
             // 透传字段，查询、通知、对账文件中均会原样出现，如有需要请启用并修改自己希望透传的数据。
@@ -180,23 +180,23 @@ class UnionPay extends Base
          *        3）退货能对11个月内的消费做（包括当清算日），支持部分退货或全额退货，到账时间较长，一般1-10个清算日（多数发卡行5天内，但工行可能会10天），所有银行都支持
          */
         $params = [
-            //以下信息非特殊情况不需要改动
-            'version' => SDKConfig::getSDKConfig()->version,              //版本号
-            'encoding' => 'utf-8',              //编码方式
-            'signMethod' => SDKConfig::getSDKConfig()->signMethod,              //签名方法
-            'txnType' => '04',                  //交易类型
-            'txnSubType' => '00',              //交易子类
-            'bizType' => '000201',              //业务类型
-            'accessType' => '0',              //接入类型
-            'channelType' => '07',              //渠道类型
-            'backUrl' => wei()->url->full('mall/payment/notify/unionPay'), //后台通知地址
+            // 以下信息非特殊情况不需要改动
+            'version' => SDKConfig::getSDKConfig()->version,              // 版本号
+            'encoding' => 'utf-8',              // 编码方式
+            'signMethod' => SDKConfig::getSDKConfig()->signMethod,              // 签名方法
+            'txnType' => '04',                  // 交易类型
+            'txnSubType' => '00',              // 交易子类
+            'bizType' => '000201',              // 业务类型
+            'accessType' => '0',              // 接入类型
+            'channelType' => '07',              // 渠道类型
+            'backUrl' => wei()->url->full('mall/payment/notify/unionPay'), // 后台通知地址
 
             // 以下信息需要填写
-            'orderId' => $data['refundId'],        //商户订单号，8-32位数字字母，不能含“-”或“_”，可以自行定制规则，重新产生，不同于原消费，此处默认取demo演示页面传递的参数
-            'merId' => $this->merId,            //商户代码，请改成自己的测试商户号，此处默认取demo演示页面传递的参数
-            'origQryId' => $data['outOrderNo'], //原消费的queryId，可以从查询接口或者通知接口中获取，此处默认取demo演示页面传递的参数
-            'txnTime' => date('YmdHis'),        //订单发送时间，格式为YYYYMMDDhhmmss，重新产生，不同于原消费，此处默认取demo演示页面传递的参数
-            'txnAmt' => (string) ($data['refundFee'] * 100),       //交易金额，退货总金额需要小于等于原消费
+            'orderId' => $data['refundId'],        // 商户订单号，8-32位数字字母，不能含“-”或“_”，可以自行定制规则，重新产生，不同于原消费，此处默认取demo演示页面传递的参数
+            'merId' => $this->merId,            // 商户代码，请改成自己的测试商户号，此处默认取demo演示页面传递的参数
+            'origQryId' => $data['outOrderNo'], // 原消费的queryId，可以从查询接口或者通知接口中获取，此处默认取demo演示页面传递的参数
+            'txnTime' => date('YmdHis'),        // 订单发送时间，格式为YYYYMMDDhhmmss，重新产生，不同于原消费，此处默认取demo演示页面传递的参数
+            'txnAmt' => (string) ($data['refundFee'] * 100),       // 交易金额，退货总金额需要小于等于原消费
 
             // 请求方保留域，
             // 透传字段，查询、通知、对账文件中均会原样出现，如有需要请启用并修改自己希望透传的数据。
@@ -217,7 +217,7 @@ class UnionPay extends Base
         $resultArr = AcpService::post($params, $url);
         $this->logger->info('银联退款返回', [$url, $params, $resultArr]);
 
-        if (count($resultArr) <= 0) { //没收到200应答的情况
+        if (count($resultArr) <= 0) { // 没收到200应答的情况
             return $this->err('很抱歉，网络请求失败，请再试一次');
         }
 
@@ -225,15 +225,15 @@ class UnionPay extends Base
             return $this->err('很抱歉，应答报文验签失败，请检查支付配置是否正确');
         }
 
-        if ($resultArr['respCode'] == '03'
-            || $resultArr['respCode'] == '04'
-            || $resultArr['respCode'] == '05'
+        if ('03' == $resultArr['respCode']
+            || '04' == $resultArr['respCode']
+            || '05' == $resultArr['respCode']
         ) {
             // 后续需发起交易状态查询交易确定交易状态
             return $this->err('银联返回：处理超时，请稍后再查询。');
         }
 
-        if ($resultArr['respCode'] != '00') {
+        if ('00' != $resultArr['respCode']) {
             return $this->err('银联返回：' . $resultArr['respMsg']);
         }
 
@@ -264,12 +264,12 @@ class UnionPay extends Base
         }
 
         foreach (get_object_vars($config) as $name => $value) {
-            if (substr($name, -3) == 'Url') {
-                $config->$name = str_replace('https://gateway.95516.com/', 'https://gateway.test.95516.com/', $value);
+            if ('Url' == substr($name, -3)) {
+                $config->{$name} = str_replace('https://gateway.95516.com/', 'https://gateway.test.95516.com/', $value);
             }
         }
 
-        $config->signCertPath = $certDir. '/acp_test_sign.pfx';
+        $config->signCertPath = $certDir . '/acp_test_sign.pfx';
         $config->ifValidateCNName = false;
         $config->ifValidateRemoteCert = false;
         $config->logLevel = 'DEBUG';
