@@ -1,3 +1,15 @@
+## [0.1.51](https://github.com/miaoxing/payment/compare/v0.1.50...v0.1.51) (2024-01-08)
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/app:** upgrade from `0.7.10` to `0.7.11`
+* **@miaoxing/product:** upgrade from `0.4.25` to `0.4.26`
+* **@miaoxing/dev:** upgrade from `9.0.0` to `9.1.0`
+
 ## [0.1.50](https://github.com/miaoxing/payment/compare/v0.1.49...v0.1.50) (2023-12-31)
 
 
