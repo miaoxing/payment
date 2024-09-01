@@ -1,3 +1,20 @@
+## [0.1.62](https://github.com/miaoxing/payment/compare/v0.1.61...v0.1.62) (2024-09-01)
+
+
+### Features
+
+* 插件增加 wei 命令行入口 ([a2fb788](https://github.com/miaoxing/payment/commit/a2fb788546546eac12582356c6d2551b9f6034b3))
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/app:** upgrade from `0.10.3` to `0.10.4`
+* **@miaoxing/product:** upgrade from `0.5.5` to `0.5.6`
+* **@miaoxing/dev:** upgrade from `9.1.3` to `9.2.0`
+
 ## [0.1.61](https://github.com/miaoxing/payment/compare/v0.1.60...v0.1.61) (2024-08-03)
 
 
